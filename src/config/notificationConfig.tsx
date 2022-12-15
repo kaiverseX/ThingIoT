@@ -2,11 +2,12 @@ import {ErrorCode} from '../types/http';
 import {INotiConfig} from '~/types/interfaceNotification';
 
 import {IconExclamationMark, IconWifiOff} from '@tabler/icons';
+import {t} from 'i18next';
 
 export const notificationConfig: INotiConfig[] = [
   {
     code: ErrorCode.ERR,
-    message: 'common.error.sth_wrong.action',
+    message: t('common.error.sth_wrong.action'),
     color: 'red',
     icon: <IconExclamationMark />,
   },
@@ -28,8 +29,8 @@ export const notificationConfig: INotiConfig[] = [
   // },
   {
     code: ErrorCode.ERR_NETWORK,
-    title: 'common.error.network.title',
-    message: 'common.error.network.message',
+    title: t('common.error.network.title'),
+    message: t('common.error.network.message'),
     color: 'red',
     icon: <IconWifiOff />,
   },

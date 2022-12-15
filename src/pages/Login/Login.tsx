@@ -25,6 +25,7 @@ import {http} from '~/helper/http';
 import {APIs} from '~/types/http';
 
 import LoginBgImg from '~/assets/img/iot.webp';
+import {showNotification} from '@mantine/notifications';
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required(),
@@ -40,13 +41,9 @@ const Login = () => {
 
   const {isLoading, mutate} = useMutation({
     mutationFn: (payload: ILoginForm) => http.post<ILoginResponse>(APIs.LOGIN, payload),
-    onSuccess: ({data}) => {
-      setToken({accessToken: data.token, refreshToken: data.refreshToken});
+    onSuccess: ({token, refreshToken}) => {
+      setToken({accessToken: token, refreshToken});
       navigate(Path.HOMEPAGE, {replace: true});
-    },
-    onError: (error) => {
-      // notify error
-      console.error(error);
     },
   });
 

@@ -10,7 +10,7 @@ import {
 import {useColorScheme, useLocalStorage} from '@mantine/hooks';
 import {NotificationsProvider} from '@mantine/notifications';
 
-import {defaultLanguage, mantineTheme} from './config/system';
+import {defaultLanguage, mantineTheme, notificationPosition} from './config/system';
 import routesConfig from './config/routesConfig';
 import {Path} from './config/path';
 import {usePersistStore} from './store';
@@ -44,7 +44,7 @@ const App = () => {
           primaryColor,
         })}
       >
-        <NotificationsProvider>
+        <NotificationsProvider position={notificationPosition}>
           <Suspense fallback={<LoadingOverlay visible />}>
             <AppShell
               className={colorScheme}

@@ -36,7 +36,7 @@
     "error": {
       "network": {
         "title": "Network Issue",
-        "message": "Network connection error detected"
+        "message": "Please check your internet connection!"
       },
       "socket": {
         "title": "Realtime Data Issue",

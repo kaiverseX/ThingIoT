@@ -1,4 +1,5 @@
 import {MantineThemeColors, MantineThemeOverride} from '@mantine/core';
+import {NotificationProviderProps} from '@mantine/notifications';
 import {usePersistStore} from '~/store';
 import {IPagination, ESupportedLangCode} from '~/types/interfaceCommon';
 import {safeAnyToNumber} from '~/util/primitiveHandle';
@@ -47,3 +48,5 @@ const mantineThemeConfig: MantineThemeOverride = {
 export const mantineTheme = (mantineCustom: MantineThemeOverride): MantineThemeOverride => {
   return {...mantineThemeConfig, ...mantineCustom};
 };
+
+export const notificationPosition: NotificationProviderProps['position'] = 'top-right';

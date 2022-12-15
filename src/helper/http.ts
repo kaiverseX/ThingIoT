@@ -1,6 +1,4 @@
 import {AxiosRequestConfig, AxiosResponse} from 'axios';
-
-import {ErrorCode} from '~/types/http';
 import axiosInstance from '~/config/httpConfig/axiosInstance';
 
 const HttpConfig: AxiosRequestConfig = {
@@ -10,23 +8,17 @@ const HttpConfig: AxiosRequestConfig = {
 };
 
 const apiGet = <T>(url: string) =>
-  new Promise<AxiosResponse<T>>((resolve, reject) => {
-    if (!navigator.onLine) {
-      // showNotification(findNotiConfig(ErrorCode.ERR_NETWORK));
-      return reject(false);
-    }
-
-    return axiosInstance.get<T>(url, HttpConfig).then(resolve, reject);
+  new Promise<AxiosResponse<T>['data']>((resolve, reject) => {
+    // Before trigger axios request, add logic if needed
+    return axiosInstance.get<T>(url, HttpConfig).then(({data}) => resolve(data), reject);
   });
 
 const apiPost = <T>(url: string, payload: unknown, config?: AxiosRequestConfig) =>
-  new Promise<AxiosResponse<T>>((resolve, reject) => {
-    if (!navigator.onLine) {
-      // showNotification(findNotiConfig(ErrorCode.ERR_NETWORK));
-      return reject(false);
-    }
-
-    return axiosInstance.post<T>(url, payload, {...HttpConfig, ...config}).then(resolve, reject);
+  new Promise<AxiosResponse<T>['data']>((resolve, reject) => {
+    // Before trigger axios request, add logic if needed
+    return axiosInstance
+      .post<T>(url, payload, {...HttpConfig, ...config})
+      .then(({data}) => resolve(data), reject);
   });
 
 export const http = {
