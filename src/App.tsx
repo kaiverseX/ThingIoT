@@ -13,12 +13,15 @@ import {NotificationsProvider} from '@mantine/notifications';
 import {defaultLanguage, mantineTheme} from './config/system';
 import routesConfig from './config/routesConfig';
 import {Path} from './config/path';
+import {usePersistStore} from './store';
 
 const AppHeader = lazy(() => import('~/layouts/AppHeader'));
 const NavbarNested = lazy(() => import('~/layouts/NavbarNested'));
 
 const App = () => {
   const defaultColorScheme = useColorScheme();
+  const primaryColor = usePersistStore((state) => state.theme);
+
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: 'mantine-color-scheme',
     defaultValue: defaultColorScheme,
@@ -38,6 +41,7 @@ const App = () => {
         theme={mantineTheme({
           datesLocale: localStorage.getItem('i18nextLng') || defaultLanguage,
           colorScheme,
+          primaryColor,
         })}
       >
         <NotificationsProvider>

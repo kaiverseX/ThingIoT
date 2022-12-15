@@ -24,6 +24,8 @@ import {useMutation} from '@tanstack/react-query';
 import {http} from '~/helper/http';
 import {APIs} from '~/types/http';
 
+import LoginBgImg from '~/assets/img/iot.webp';
+
 const validationSchema = Yup.object().shape({
   username: Yup.string().required(),
   password: Yup.string().required(),
@@ -66,7 +68,7 @@ const Login = () => {
   }, [accessToken]);
 
   return (
-    <BackgroundImage src="src/assets/img/iot.webp">
+    <BackgroundImage src={LoginBgImg}>
       <Head title="Login" />
       <LoadingOverlay overlayOpacity={1} visible={!!accessToken} />
       <div className="dark:bg-slate-900/40">

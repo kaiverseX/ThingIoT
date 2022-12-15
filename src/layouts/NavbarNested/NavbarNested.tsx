@@ -8,7 +8,7 @@ import {
   IconNotes,
   IconPresentationAnalytics,
 } from '@tabler/icons';
-import LinksGroup from '../LinksGroup';
+import LinksGroup from './components/LinksGroup';
 
 const mockdata = [
   {label: 'Dashboard', icon: IconGauge},

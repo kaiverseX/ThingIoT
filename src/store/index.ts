@@ -14,8 +14,8 @@ export const usePersistStore = create<IPersistStore>()(
     }),
     {
       name: 'keepverse',
-      partialize: ({uid, userData, accessToken}) => ({uid, userData, accessToken}),
-      getStorage: () => sessionStorage, // create new store if needs to use other storage (eg: localStorage)
+      partialize: ({uid, userData, accessToken, theme}) => ({uid, userData, accessToken, theme}),
+      getStorage: () => localStorage, // create new store if needs to use other storage (eg: sessionStorage)
     },
   ),
 );

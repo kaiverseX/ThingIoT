@@ -1,4 +1,5 @@
-import {MantineThemeOverride} from '@mantine/core';
+import {MantineThemeColors, MantineThemeOverride} from '@mantine/core';
+import {usePersistStore} from '~/store';
 import {IPagination, ESupportedLangCode} from '~/types/interfaceCommon';
 import {safeAnyToNumber} from '~/util/primitiveHandle';
 
@@ -27,20 +28,20 @@ export const paginationConfig: IPagination = {
  */
 const mantineThemeConfig: MantineThemeOverride = {
   // default theme config
-  colors: {
-    dark: [
-      '#FFFFFF',
-      '#A6A7AB',
-      '#909296',
-      '#5C5F66',
-      '#373A40',
-      '#2C2E33',
-      '#25262B',
-      '#1A1B1E',
-      '#141517',
-      '#101113',
-    ],
-  },
+  // colors: {
+  //   dark: [
+  //     '#FFFFFF',
+  //     '#A6A7AB',
+  //     '#909296',
+  //     '#5C5F66',
+  //     '#373A40',
+  //     '#2C2E33',
+  //     '#25262B',
+  //     '#1A1B1E',
+  //     '#141517',
+  //     '#101113',
+  //   ],
+  // },
 };
 
 export const mantineTheme = (mantineCustom: MantineThemeOverride): MantineThemeOverride => {

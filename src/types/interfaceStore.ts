@@ -1,3 +1,4 @@
+import {MantineThemeColors} from '@mantine/core';
 import {IAccountInfo, IUserData} from './interfaceCommon';
 
 export interface IAuth {
@@ -13,6 +14,9 @@ export interface IAuth {
 export interface IUserStore {
   userData: IUserData;
   setUserData: (test: IUserData) => void;
+
+  theme: keyof MantineThemeColors;
+  setTheme: (theme: keyof MantineThemeColors) => void;
   resetUserStore: () => void;
 }
 

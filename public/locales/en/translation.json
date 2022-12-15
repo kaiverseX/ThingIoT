@@ -7,6 +7,7 @@
       "switch": "Toggle color scheme mode"
     },
     "home_page": "Homepage",
+    "add": "Add",
     "close": "Close",
     "afk": {
       "title": "Standby mode",
@@ -50,8 +51,8 @@
       "description": "Page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL. If you think this is an error contact support."
     }
   },
-  "notes": {
-    "pageTitle": "Notes",
+  "home": {
+    "pageTitle": "Homepage",
     "title": {
       "label": "Title",
       "placeholder": "Title"

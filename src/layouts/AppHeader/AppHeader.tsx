@@ -73,7 +73,9 @@ const AppHeader = () => {
                 <Image
                   width={200}
                   height={80}
-                  src={`src/assets/animated/decor/${decorBgRand}.svg`}
+                  src={
+                    new URL(`/src/assets/animated/decor/${decorBgRand}.svg`, import.meta.url).href
+                  }
                   alt="Random decor image"
                 />
               </div>
