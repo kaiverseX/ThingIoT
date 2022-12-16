@@ -1,5 +1,7 @@
 
 # ThingIoT
+[![CI](https://github.com/kaisergeX/ThingIoT/actions/workflows/ci.yml/badge.svg)](https://github.com/kaisergeX/ThingIoT/actions/workflows/ci.yml)
+
 [ReactJS](https://reactjs.org/) | [Vite](https://vitejs.dev/) | [Mantine UI](https://mantine.dev/)
 ## Environment Variables
 

@@ -22,11 +22,11 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
-        node-version: '12.x'
+        node-version: '18.x'
         cache: 'pnpm'
     - name: Install dependencies
       run: pnpm i
     - name: Run Lint
       run: pnpm lint
     - name: Build
-      run: pnpm build --if-present
+      run: pnpm build
