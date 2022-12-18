@@ -1,3 +1,5 @@
+import {Nullish} from '~/types/interfaceCommon';
+
 export const sleep = (millis: number) => {
   return new Promise((resolve) => setTimeout(resolve, millis));
 };
@@ -26,3 +28,6 @@ export const safeAnyToJSON = (input: any) => {
     return undefined;
   }
 };
+
+export const isNullist = (input: unknown): input is Nullish =>
+  input === null || input === undefined;

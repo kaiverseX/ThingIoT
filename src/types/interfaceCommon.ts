@@ -63,3 +63,8 @@ export interface IUserData {
 
   createdTime?: number;
 }
+
+export type NonObject = string | number | boolean | undefined; // symbol is rare use case, skipped
+export type Nullish = null | undefined;
+
+export type TEveryDayArr = (NonObject | {[key: string]: NonObject | null} | null | TEveryDayArr)[];
