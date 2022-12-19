@@ -25,7 +25,6 @@ import {http} from '~/helper/http';
 import {APIs} from '~/types/http';
 
 import LoginBgImg from '~/assets/img/iot.webp';
-import {showNotification} from '@mantine/notifications';
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required(),

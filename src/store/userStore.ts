@@ -4,7 +4,10 @@ import {IUserData} from '~/types/interfaceCommon';
 import {IPersistStore, IUserStore} from '~/types/interfaceStore';
 
 export const defaultUserData: IUserData = {
-  setting: {newOnBot: false},
+  email: '',
+  authority: '',
+  firstName: '',
+  lastName: '',
 };
 
 export const defaultTheme: keyof MantineThemeColors = 'teal';
