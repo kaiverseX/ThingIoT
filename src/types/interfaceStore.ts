@@ -1,11 +1,12 @@
 import {MantineThemeColors} from '@mantine/core';
 import {IAccountInfo, IUserData} from './interfaceCommon';
 
-export interface IAuth {
+export interface IAuthState {
   uid?: string;
   accessToken?: string;
   refreshToken?: string;
-
+}
+export interface IAuth extends IAuthState {
   setUID: (uid: string) => void;
   setToken: (token: {accessToken: string; refreshToken: string}) => void;
   resetAuthStore: () => void;

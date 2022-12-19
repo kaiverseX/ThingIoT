@@ -51,6 +51,9 @@
       "description": "Page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL. If you think this is an error contact support."
     }
   },
+  "auth": {
+    "unknown": "Unknown user"
+  },
   "home": {
     "pageTitle": "Homepage",
     "title": {
