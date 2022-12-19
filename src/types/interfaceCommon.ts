@@ -20,7 +20,26 @@ export interface LinksGroupProps {
 }
 
 export interface IUserData {
-  setting: {newOnBot: boolean};
+  id?: {
+    id: string;
+    entityType: string;
+  };
+  tenantId?: {
+    id: string;
+    entityType: string;
+  };
+  customerId?: {
+    id: string;
+    entityType: string;
+  };
+  email: string;
+  name?: string;
+  authority: string;
+  firstName: string;
+  lastName: string;
+  additionalInfo?: JSON;
+
+  createdTime?: number;
 }
 
 export interface IAccountInfo {
