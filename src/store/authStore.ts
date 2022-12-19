@@ -1,5 +1,11 @@
 import {StateCreator} from 'zustand';
-import {IAuth, IPersistStore} from '~/types/interfaceStore';
+import {IAuth, IAuthState, IPersistStore} from '~/types/interfaceStore';
+
+export const defaultAuthState: IAuthState = {
+  uid: undefined,
+  accessToken: undefined,
+  refreshToken: undefined,
+};
 
 export const createAuthSlice: StateCreator<
   IPersistStore,
@@ -9,5 +15,5 @@ export const createAuthSlice: StateCreator<
 > = (set) => ({
   setToken: ({accessToken, refreshToken}) => set(() => ({accessToken, refreshToken})),
   setUID: (uid) => set(() => ({uid})),
-  resetAuthStore: () => set({}, true),
+  resetAuthStore: () => set(defaultAuthState),
 });

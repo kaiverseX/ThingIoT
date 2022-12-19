@@ -1,12 +1,12 @@
 export enum APIs {
   LOGIN = 'auth/login#response=login&useMock=false',
-  GET_DIAGRAM_DATA = '/node/list',
-  GET_LIST_EVENT = '/event/search/load-more',
-  GET_LIST_EVENT_PAGING = '/event/search/paging',
+  LOGOUT = 'auth/logout',
+  USER_INFO = 'auth/user',
 }
 
 export enum QueryKey {
   LOGIN = 'login',
+  USER_INFO = 'user_info',
 }
 
 export enum ErrorCode {
