@@ -1,6 +1,5 @@
-import {MantineThemeColors, MantineThemeOverride} from '@mantine/core';
+import {MantineThemeOverride} from '@mantine/core';
 import {NotificationProviderProps} from '@mantine/notifications';
-import {usePersistStore} from '~/store';
 import {IPagination, ESupportedLangCode} from '~/types/interfaceCommon';
 import {safeAnyToNumber} from '~/util/primitiveHandle';
 
@@ -23,9 +22,23 @@ export const paginationConfig: IPagination = {
 };
 
 /**
- * Theme & Color schema
- *
- * https://mantine.dev/theming/mantine-provider/
+ * Mantine Theme: [docs](https://mantine.dev/theming/mantine-provider/).
+ * ___
+ * ⭐ Wanna use Tailwind Color palette?
+ * 
+ * 1️⃣ `import tailwindPalette from 'tailwindcss/colors';`
+ * 
+ * 2️⃣ Convert `tailwindPalette` to Mantine color schema object.
+ * 
+  `
+    Object.fromEntries(Object.entries(tailwindColors).filter(([_, v]) => typeof v !== 'string').map(([k, v]) => [k, Object.values(v)]))
+  `
+ *   
+ * 3️⃣ Remove deprecated/name changed Tailwind palettes from step 2️⃣'s result object. ref: [docs](https://tailwindcss.com/docs/upgrade-guide#color-palette-changes).
+ * 
+ * 4️⃣ Add new color schema to this config.
+ * 
+ * Additional info: [Tailwind's palette list](https://tailwindcss.com/docs/customizing-colors)
  */
 const mantineThemeConfig: MantineThemeOverride = {
   // default theme config

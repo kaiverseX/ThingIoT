@@ -1,89 +1,59 @@
-import {useState} from 'react';
-import {Group, Box, Collapse, ThemeIcon, Text, UnstyledButton, createStyles} from '@mantine/core';
-import {IconChevronLeft, IconChevronRight} from '@tabler/icons';
+import {ThemeIcon, NavLink} from '@mantine/core';
 
-import {LinksGroupProps} from '~/types/interfaceCommon';
+import {ILinkGroup, ILinkGroupChild} from '~/types/interfaceCommon';
+import {Link, useLocation} from 'react-router-dom';
+import {Path} from '~/config/path';
 
-const useStyles = createStyles((theme) => ({
-  control: {
-    fontWeight: 500,
-    display: 'block',
-    width: '100%',
-    padding: `${theme.spacing.xs}px ${theme.spacing.md}px`,
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
-    fontSize: theme.fontSizes.sm,
+const LinksGroup = ({
+  icon: Icon,
+  label: groupLabel,
+  link: groupLink,
+  children: groupChildren,
+}: ILinkGroup) => {
+  const {pathname} = useLocation();
+  const isGroupActive = !!groupLink && pathname !== Path.HOMEPAGE && pathname.includes(groupLink);
 
-    '&:hover': {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
-      color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-    },
-  },
-
-  link: {
-    fontWeight: 500,
-    display: 'block',
-    textDecoration: 'none',
-    padding: `${theme.spacing.xs}px ${theme.spacing.md}px`,
-    paddingLeft: 31,
-    marginLeft: 30,
-    fontSize: theme.fontSizes.sm,
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
-    borderLeft: `1px solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
-    }`,
-
-    '&:hover': {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.colors.gray[0],
-      color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-    },
-  },
-
-  chevron: {
-    transition: 'transform 200ms ease',
-  },
-}));
-
-const LinksGroup = ({icon: Icon, label, initiallyOpened, links}: LinksGroupProps) => {
-  const {classes, theme} = useStyles();
-  const hasLinks = Array.isArray(links);
-  const [opened, setOpened] = useState(initiallyOpened || false);
-  const ChevronIcon = theme.dir === 'ltr' ? IconChevronRight : IconChevronLeft;
-  const items = (hasLinks ? links : []).map((link) => (
-    <Text<'a'>
-      component="a"
-      className={classes.link}
-      href={link.link}
-      key={link.label}
-      onClick={(event) => event.preventDefault()}
-    >
-      {link.label}
-    </Text>
-  ));
+  const renderChildren = (childrenConfig?: ILinkGroupChild[]) =>
+    childrenConfig?.map(({label, link, children}) => (
+      <div key={label} className="border-l border-neutral-200">
+        <NavLink
+          classNames={{
+            root: 'py-3 pl-7 text-slate-600 font-medium hover:text-black dark:text-neutral-400 dark:hover:text-white',
+          }}
+          component={Link}
+          to={link}
+          label={label}
+          childrenOffset="xl"
+          variant="light"
+          active={pathname !== Path.HOMEPAGE && pathname === link}
+        >
+          {renderChildren(children)}
+        </NavLink>
+      </div>
+    ));
 
   return (
-    <>
-      <UnstyledButton onClick={() => setOpened((o) => !o)} className={classes.control}>
-        <Group position="apart" spacing={0}>
-          <Box sx={{display: 'flex', alignItems: 'center'}}>
-            <ThemeIcon variant="light" size={30}>
-              <Icon size={18} />
-            </ThemeIcon>
-            <Box ml="md">{label}</Box>
-          </Box>
-          {hasLinks && (
-            <ChevronIcon
-              className={classes.chevron}
-              size={14}
-              stroke={1.5}
-              style={{
-                transform: opened ? `rotate(${theme.dir === 'rtl' ? -90 : 90}deg)` : 'none',
-              }}
-            />
-          )}
-        </Group>
-      </UnstyledButton>
-      {hasLinks ? <Collapse in={opened}>{items}</Collapse> : null}
-    </>
+    <NavLink
+      classNames={{
+        root: `py-3 text-slate-600 font-medium hover:text-black dark:${
+          isGroupActive ? 'text-white' : 'text-neutral-400'
+        } dark:hover:text-white `,
+      }}
+      component={Link}
+      to={groupLink || '#'}
+      label={groupLabel}
+      childrenOffset="xl"
+      icon={
+        <ThemeIcon variant="light" size={30}>
+          <Icon size={18} />
+        </ThemeIcon>
+      }
+      variant="light"
+      active={isGroupActive}
+      disabled={!groupLink && !groupChildren}
+    >
+      {renderChildren(groupChildren)}
+    </NavLink>
   );
 };
 
