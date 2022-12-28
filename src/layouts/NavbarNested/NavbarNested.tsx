@@ -2,31 +2,27 @@ import {Navbar, ScrollArea} from '@mantine/core';
 import {
   IconAdjustments,
   IconCalendarStats,
+  IconCpu,
   IconFileAnalytics,
   IconGauge,
   IconLock,
-  IconNotes,
   IconPresentationAnalytics,
 } from '@tabler/icons';
+import {Path} from '~/config/path';
+import {ILinkGroup} from '~/types/interfaceCommon';
 import LinksGroup from './components/LinksGroup';
 
-const mockdata = [
+const nestedNavbarConfig: ILinkGroup[] = [
   {label: 'Dashboard', icon: IconGauge},
   {
-    label: 'Market news',
-    icon: IconNotes,
-    initiallyOpened: true,
-    links: [
-      {label: 'Overview', link: '/'},
-      {label: 'Forecasts', link: '/'},
-      {label: 'Outlook', link: '/'},
-      {label: 'Real time', link: '/'},
-    ],
+    label: 'Devices',
+    icon: IconCpu,
+    link: Path.Device,
   },
   {
     label: 'Releases',
     icon: IconCalendarStats,
-    links: [
+    children: [
       {label: 'Upcoming releases', link: '/'},
       {label: 'Previous releases', link: '/'},
       {label: 'Releases schedule', link: '/'},
@@ -38,7 +34,7 @@ const mockdata = [
   {
     label: 'Security',
     icon: IconLock,
-    links: [
+    children: [
       {label: 'Enable 2FA', link: '/'},
       {label: 'Change password', link: '/'},
       {label: 'Recovery codes', link: '/'},
@@ -46,13 +42,22 @@ const mockdata = [
   },
 ];
 
+/**
+ * `NavbarNested` allows infinite nested level. But we should avoid nested as much as possible.
+ *
+ * ⚠️`label` of each navbar item must be a *unique* string.
+ *___
+ * @notes In case of complex navbar routers, use Navbar with multiple collapsible sections instead.
+ */
 const NavbarNested = () => {
-  const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
+  const renderNavbarItems = nestedNavbarConfig.map((item) => (
+    <LinksGroup {...item} key={item.label} />
+  ));
 
   return (
     <Navbar width={{base: 250}}>
       <Navbar.Section grow component={ScrollArea}>
-        {links}
+        {renderNavbarItems}
       </Navbar.Section>
     </Navbar>
   );
