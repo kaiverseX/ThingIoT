@@ -12,11 +12,17 @@ export interface IPagination {
   pageSizePool: number[];
 }
 
-export interface LinksGroupProps {
+export interface ILinkGroupChild {
+  label: string;
+  link: string;
+  children?: ILinkGroupChild[];
+}
+
+export interface ILinkGroup {
   icon: TablerIcon;
   label: string;
-  initiallyOpened?: boolean;
-  links?: {label: string; link: string}[];
+  link?: string;
+  children?: ILinkGroupChild[];
 }
 
 export interface IUserData {
