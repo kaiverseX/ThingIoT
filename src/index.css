@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  *,
+  ::before,
+  ::after {
+    border-width: 0;
+    border-style: solid;
+  }
+
   /* custom scrollbar */
   ::-webkit-scrollbar {
     width: 20px;

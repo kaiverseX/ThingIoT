@@ -4,6 +4,7 @@ import {Path} from './path';
 
 const PrivateOutlet = lazy(() => import('~/outlet/PrivateOutlet'));
 const Homepage = lazy(() => import('~/pages/Homepage'));
+const Device = lazy(() => import('~/pages/Device'));
 const NotFound = lazy(() => import('~/pages/NotFound'));
 const Login = lazy(() => import('~/pages/Login'));
 
@@ -17,8 +18,12 @@ const routesConfig: RouteObject[] = [
     element: <PrivateOutlet />,
     children: [
       {
-        element: <Homepage />,
         index: true,
+        element: <Homepage />,
+      },
+      {
+        path: Path.Device,
+        element: <Device />,
       },
       {
         path: Path.UNDEFINED,
