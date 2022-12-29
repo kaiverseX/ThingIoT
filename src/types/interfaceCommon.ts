@@ -16,13 +16,16 @@ export interface ILinkGroupChild {
   label: string;
   link: string;
   children?: ILinkGroupChild[];
+  disabled?: boolean;
 }
 
 export interface ILinkGroup {
   icon: TablerIcon;
   label: string;
   link?: string;
+  isFullLink?: boolean;
   children?: ILinkGroupChild[];
+  disabled?: boolean;
 }
 
 export interface IUserData {
