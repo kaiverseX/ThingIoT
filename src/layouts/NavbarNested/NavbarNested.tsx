@@ -1,19 +1,11 @@
 import {Navbar, ScrollArea} from '@mantine/core';
-import {
-  IconAdjustments,
-  IconCalendarStats,
-  IconCpu,
-  IconFileAnalytics,
-  IconGauge,
-  IconLock,
-  IconPresentationAnalytics,
-} from '@tabler/icons';
+import {IconAdjustments, IconCalendarStats, IconCpu, IconGauge, IconLock} from '@tabler/icons';
 import {Path} from '~/config/path';
 import {ILinkGroup} from '~/types/interfaceCommon';
 import LinksGroup from './components/LinksGroup';
 
 const nestedNavbarConfig: ILinkGroup[] = [
-  {label: 'Dashboard', icon: IconGauge},
+  {label: 'Dashboard', icon: IconGauge, link: Path.HOMEPAGE},
   {
     label: 'Devices',
     icon: IconCpu,
@@ -22,22 +14,26 @@ const nestedNavbarConfig: ILinkGroup[] = [
   {
     label: 'Releases',
     icon: IconCalendarStats,
+    link: '/releases',
     children: [
-      {label: 'Upcoming releases', link: '/'},
-      {label: 'Previous releases', link: '/'},
-      {label: 'Releases schedule', link: '/'},
+      {label: 'Upcoming releases', link: '/releases/upcoming/:id'},
+      {label: 'Previous releases', link: '/releases/rrevious', disabled: true},
+      {label: 'Releases schedule', link: '/releases/schedule'},
     ],
   },
-  {label: 'Analytics', icon: IconPresentationAnalytics},
-  {label: 'Contracts', icon: IconFileAnalytics},
-  {label: 'Settings', icon: IconAdjustments},
   {
-    label: 'Security',
+    label: 'Pending feature...',
     icon: IconLock,
+    disabled: true,
+  },
+  {
+    label: 'Settings',
+    icon: IconAdjustments,
+    link: '/settings',
     children: [
-      {label: 'Enable 2FA', link: '/'},
-      {label: 'Change password', link: '/'},
-      {label: 'Recovery codes', link: '/'},
+      {label: 'Enable 2FA', link: '/settings/2FA', disabled: true},
+      {label: 'Change password', link: '/settings/change-password', disabled: true},
+      {label: 'Recovery codes', link: '/settings/recovery', disabled: true},
     ],
   },
 ];
