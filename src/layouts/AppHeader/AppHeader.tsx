@@ -97,7 +97,9 @@ const AppHeader = () => {
                 </Text>
               )}
             </div>
-            <Menu.Item icon={<IconSettings size={14} />}>Settings</Menu.Item>
+            <Menu.Item icon={<IconSettings size={14} />} component={Link} to={Path.SETTING}>
+              {t('setting.pageTitle')}
+            </Menu.Item>
             <Menu.Divider />
             <Menu.Item
               color="red"
