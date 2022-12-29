@@ -45,7 +45,9 @@ const App = () => {
         })}
       >
         <NotificationsProvider position={notificationPosition}>
-          <Suspense fallback={<LoadingOverlay visible />}>
+          <Suspense
+            fallback={<LoadingOverlay overlayOpacity={0.3} transitionDuration={500} visible />}
+          >
             <AppShell
               className={colorScheme}
               padding="md"
