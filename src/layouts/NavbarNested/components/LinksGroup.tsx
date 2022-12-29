@@ -1,56 +1,80 @@
-import {ThemeIcon, NavLink} from '@mantine/core';
+import {ThemeIcon, NavLink, ColorScheme} from '@mantine/core';
+import {useLocalStorage} from '@mantine/hooks';
+import {Link, useLocation, useMatch, useResolvedPath} from 'react-router-dom';
 
 import {ILinkGroup, ILinkGroupChild} from '~/types/interfaceCommon';
-import {Link, useLocation} from 'react-router-dom';
-import {Path} from '~/config/path';
 
 const LinksGroup = ({
   icon: Icon,
   label: groupLabel,
   link: groupLink,
   children: groupChildren,
+  disabled: groupDisabled,
 }: ILinkGroup) => {
+  const [colorScheme] = useLocalStorage<ColorScheme>({
+    key: 'mantine-color-scheme',
+    getInitialValueInEffect: true,
+  });
+
   const {pathname} = useLocation();
-  const isGroupActive = !!groupLink && pathname !== Path.HOMEPAGE && pathname.includes(groupLink);
+  const {pathname: pathNameResolved} = useResolvedPath(groupLink || '#');
+  const isGroupActive =
+    pathname === pathNameResolved ||
+    (pathname.startsWith(pathNameResolved) && pathname.charAt(pathNameResolved.length) === '/');
 
   const renderChildren = (childrenConfig?: ILinkGroupChild[]) =>
-    childrenConfig?.map(({label, link, children}) => (
-      <div key={label} className="border-l border-neutral-200">
-        <NavLink
-          classNames={{
-            root: 'py-3 pl-7 text-slate-600 font-medium hover:text-black dark:text-neutral-400 dark:hover:text-white',
-          }}
-          component={Link}
-          to={link}
-          label={label}
-          childrenOffset="xl"
-          variant="light"
-          active={pathname !== Path.HOMEPAGE && pathname === link}
-        >
-          {renderChildren(children)}
-        </NavLink>
-      </div>
-    ));
+    childrenConfig?.map(({label, link, children, disabled}) => {
+      const {pathname: pathnameResolved} = useResolvedPath(link);
+      const isActive = !!useMatch({path: pathnameResolved});
+
+      return (
+        <div key={label} className="border-l border-neutral-200">
+          <NavLink
+            className="py-3 pl-7 font-medium"
+            component={Link}
+            to={link}
+            label={label}
+            childrenOffset="xl"
+            variant="filled"
+            active={isActive}
+            disabled={disabled}
+          >
+            {renderChildren(children)}
+          </NavLink>
+        </div>
+      );
+    });
+
+  if (groupDisabled || !groupLink) {
+    return (
+      <NavLink
+        className="mb-0.5 py-3 font-medium"
+        label={groupLabel}
+        icon={
+          <ThemeIcon variant="light" size={30}>
+            <Icon size={18} />
+          </ThemeIcon>
+        }
+        disabled
+      />
+    );
+  }
 
   return (
     <NavLink
-      classNames={{
-        root: `py-3 text-slate-600 font-medium hover:text-black dark:${
-          isGroupActive ? 'text-white' : 'text-neutral-400'
-        } dark:hover:text-white `,
-      }}
+      className="mb-0.5 py-3 font-medium"
       component={Link}
-      to={groupLink || '#'}
+      to={groupLink}
       label={groupLabel}
       childrenOffset="xl"
       icon={
-        <ThemeIcon variant="light" size={30}>
+        <ThemeIcon variant={colorScheme === 'dark' ? 'outline' : 'light'} size={30}>
           <Icon size={18} />
         </ThemeIcon>
       }
-      variant="light"
+      variant={groupChildren ? 'light' : 'filled'}
       active={isGroupActive}
-      disabled={!groupLink && !groupChildren}
+      defaultOpened={isGroupActive}
     >
       {renderChildren(groupChildren)}
     </NavLink>
