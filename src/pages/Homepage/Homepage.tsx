@@ -1,6 +1,5 @@
-import {lazy, Suspense} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Skeleton, Title, useMantineTheme} from '@mantine/core';
+import {Button, Title, useMantineTheme} from '@mantine/core';
 import {useQuery} from '@tanstack/react-query';
 
 import {Head} from '~/outlet/Head';
@@ -8,8 +7,9 @@ import {http} from '~/helper/http';
 import {QueryKey, APIs} from '~/types/http';
 import {IUserData} from '~/types/interfaceCommon';
 import {usePersistStore} from '~/store';
-
-const Showcase = lazy(() => import('~/features/Demos/Showcase'));
+import {Link} from 'react-router-dom';
+import {Path} from '~/config/path';
+import {IconAdjustments} from '@tabler/icons';
 
 const Homepage = () => {
   const {t} = useTranslation();
@@ -28,9 +28,16 @@ const Homepage = () => {
       <Head />
       <Title color={theme.primaryColor}>{t('home.pageTitle')}</Title>
 
-      <Suspense fallback={<Skeleton className="h-1/4" visible />}>
-        <Showcase />
-      </Suspense>
+      <div className="my-4">
+        <Button
+          component={Link}
+          to={Path.SETTING}
+          leftIcon={<IconAdjustments size={20} />}
+          radius="md"
+        >
+          Go to Showcase
+        </Button>
+      </div>
     </>
   );
 };

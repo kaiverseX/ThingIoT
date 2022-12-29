@@ -7,6 +7,7 @@ import {Path} from '~/config/path';
 import {Head} from '~/outlet/Head';
 
 import Animated404 from '~/assets/icon/404-animated.svg';
+import Static404 from '~/assets/icon/404.svg';
 
 const NotFound = () => {
   const {t} = useTranslation();
@@ -23,7 +24,7 @@ const NotFound = () => {
           {t('common.not_found.description')}
         </Text>
 
-        <Button onClick={() => navigate(Path.HOMEPAGE)}>{t('common.home_page')}</Button>
+        <Button onClick={() => navigate(Path.HOMEPAGE)}>{t('home.pageTitle')}</Button>
       </div>
       {srcImageRand.current ? (
         <div className="flex-1">
@@ -32,7 +33,7 @@ const NotFound = () => {
           </object>
         </div>
       ) : (
-        <Image className="flex-1" src="src/assets/icon/404.svg" />
+        <Image className="flex-1" src={Static404} />
       )}
     </div>
   );

@@ -2,7 +2,7 @@ const GridNotes = () => {
   const renderNoteList = Array.from({length: 5}).map((_, index) => (
     <div
       key={index}
-      className="min-h-[12rem] rounded-lg border border-solid border-gray-200 p-4 pb-6 transition-shadow duration-150 ease-in-out hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
+      className="min-h-[12rem] rounded-lg border border-gray-200 p-4 pb-6 transition-shadow duration-150 ease-in-out hover:shadow-md dark:border-gray-700 dark:bg-gray-800"
     >
       <h3 className="mb-4 font-semibold tracking-tight text-gray-900 line-clamp-3 dark:text-white">
         Title

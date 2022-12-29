@@ -6,7 +6,6 @@
       "light": "Light mode",
       "switch": "Toggle color scheme mode"
     },
-    "home_page": "Homepage",
     "add": "Add",
     "close": "Close",
     "afk": {
@@ -64,5 +63,14 @@
       "label": "Content",
       "placeholder": "Content"
     }
+  },
+  "dashboard": {
+    "pageTitle": "Dashboard"
+  },
+  "device": {
+    "pageTitle": "Devices"
+  },
+  "setting": {
+    "pageTitle": "Settings"
   }
 }

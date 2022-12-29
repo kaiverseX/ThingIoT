@@ -1,8 +1,5 @@
 import {TablerIcon} from '@tabler/icons';
-
-// export interface IRoute extends RouteObject {
-//   path: Path;
-// }
+import {HTMLAttributeAnchorTarget, ReactNode} from 'react';
 
 export enum ESupportedLangCode {
   EN = 'en',
@@ -12,20 +9,18 @@ export interface IPagination {
   pageSizePool: number[];
 }
 
-export interface ILinkGroupChild {
+export interface INavLinkChild {
   label: string;
-  link: string;
-  children?: ILinkGroupChild[];
+  link?: string;
+  isFullPath?: boolean;
+  content?: ReactNode;
+  children?: INavLinkChild[];
+  target?: HTMLAttributeAnchorTarget;
   disabled?: boolean;
 }
 
-export interface ILinkGroup {
+export interface INavLink extends INavLinkChild {
   icon: TablerIcon;
-  label: string;
-  link?: string;
-  isFullLink?: boolean;
-  children?: ILinkGroupChild[];
-  disabled?: boolean;
 }
 
 export interface IUserData {
