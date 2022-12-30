@@ -31,11 +31,11 @@ const Homepage = () => {
       <div className="my-4">
         <Button
           component={Link}
-          to={Path.SETTING}
+          to={Path.DEMO_UI}
           leftIcon={<IconAdjustments size={20} />}
           radius="md"
         >
-          Go to Showcase
+          Go to UI Demo
         </Button>
       </div>
     </>

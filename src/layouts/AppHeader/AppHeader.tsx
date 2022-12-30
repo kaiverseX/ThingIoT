@@ -51,13 +51,13 @@ const AppHeader = () => {
   }, []);
 
   return (
-    <Header height={60} className="flex items-center justify-between gap-4 px-4">
+    <Header height={60} className="flex-center-between px-4">
       <Link className="cursor-pointer no-underline" to={Path.HOMEPAGE}>
         <span className="bg-gradient-to-r from-rose-500 to-violet-500 bg-clip-text text-3xl font-bold text-transparent">
           Deviceverse
         </span>
       </Link>
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex-center-between">
         <Tooltip withArrow label={t(`common.theme.${colorScheme}`)}>
           <ActionIcon
             variant="outline"

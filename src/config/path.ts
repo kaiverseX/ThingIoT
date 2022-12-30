@@ -10,6 +10,8 @@ export enum Path {
 
   SETTING = '/setting',
 
+  DEMO_UI = '/ui',
+
   NOT_FOUND = '/not-found',
   UNDEFINED = '*',
 }

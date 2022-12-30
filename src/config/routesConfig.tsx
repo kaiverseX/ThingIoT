@@ -8,6 +8,7 @@ const Device = lazy(() => import('~/pages/Device'));
 const Setting = lazy(() => import('~/pages/Setting'));
 const NotFound = lazy(() => import('~/pages/NotFound'));
 const Login = lazy(() => import('~/pages/Login'));
+const DemoUI = lazy(() => import('~/pages/DemoUI/DemoUI'));
 
 const routesConfig: RouteObject[] = [
   {
@@ -29,6 +30,10 @@ const routesConfig: RouteObject[] = [
       {
         path: Path.SETTING,
         element: <Setting />,
+      },
+      {
+        path: Path.DEMO_UI,
+        element: <DemoUI />,
       },
       {
         path: Path.UNDEFINED,

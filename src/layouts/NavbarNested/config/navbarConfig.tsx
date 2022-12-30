@@ -1,5 +1,12 @@
 import {Chip} from '@mantine/core';
-import {IconAdjustments, IconCalendarStats, IconCpu, IconGauge, IconLock} from '@tabler/icons';
+import {
+  IconAdjustments,
+  IconCalendarStats,
+  IconComponents,
+  IconCpu,
+  IconGauge,
+  IconLock,
+} from '@tabler/icons';
 import {t} from 'i18next';
 import {FullPath, Path} from '~/config/path';
 import {INavLink} from '~/types/interfaceCommon';
@@ -21,6 +28,11 @@ export const nestedNavbarConfig: INavLink[] = [
 ];
 
 export const exampleConfig: INavLink[] = [
+  {
+    label: 'Demo UI',
+    icon: IconComponents,
+    link: Path.DEMO_UI,
+  },
   {
     label: 'Releases',
     icon: IconCalendarStats,
