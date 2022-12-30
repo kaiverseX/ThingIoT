@@ -2,13 +2,8 @@ import {ReactNode} from 'react';
 import {Badge, Button} from '@mantine/core';
 
 export const NavItemBadge = (label: string) => (
-  <div className="px-4 py-2">
-    <Badge
-      variant="gradient"
-      gradient={{from: 'teal', to: 'lime', deg: 105}}
-      classNames={{root: 'max-w-[12rem]'}}
-      fullWidth
-    >
+  <div className="py-2 pl-7 pr-4">
+    <Badge variant="gradient" gradient={{from: 'teal', to: 'lime', deg: 105}} fullWidth>
       {label}
     </Badge>
   </div>

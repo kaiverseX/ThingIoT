@@ -17,6 +17,7 @@ import {usePersistStore} from './store';
 
 const AppHeader = lazy(() => import('~/layouts/AppHeader'));
 const NavbarNested = lazy(() => import('~/layouts/NavbarNested'));
+const ScrollTop = lazy(() => import('~/features/ScrollTop'));
 
 const App = () => {
   const defaultColorScheme = useColorScheme();
@@ -61,6 +62,7 @@ const App = () => {
                   })}
             >
               {routers}
+              <ScrollTop />
             </AppShell>
           </Suspense>
         </NotificationsProvider>

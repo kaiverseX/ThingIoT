@@ -15,27 +15,28 @@ const NotFound = () => {
   const srcImageRand = useRef(Math.floor(Math.random() * 2));
 
   return (
-    <div className="flex h-full items-center gap-4">
+    <>
       <Head title="404" />
+      <div className="grid h-full grid-cols-2 place-items-center gap-4">
+        <div>
+          <Title>{t('common.error.sth_wrong.normal')}</Title>
+          <Text color="dimmed" size="lg" className="my-4">
+            {t('common.not_found.description')}
+          </Text>
 
-      <div className="flex-1">
-        <Title>{t('common.error.sth_wrong.normal')}</Title>
-        <Text color="dimmed" size="lg" className="my-4">
-          {t('common.not_found.description')}
-        </Text>
-
-        <Button onClick={() => navigate(Path.HOMEPAGE)}>{t('home.pageTitle')}</Button>
-      </div>
-      {srcImageRand.current ? (
-        <div className="flex-1">
-          <object type="image/svg+xml" data={Animated404}>
-            404-svg-animation
-          </object>
+          <Button onClick={() => navigate(Path.HOMEPAGE)}>{t('home.pageTitle')}</Button>
         </div>
-      ) : (
-        <Image className="flex-1" src={Static404} />
-      )}
-    </div>
+        {srcImageRand.current ? (
+          <div>
+            <object type="image/svg+xml" data={Animated404}>
+              404-svg-animation
+            </object>
+          </div>
+        ) : (
+          <Image src={Static404} />
+        )}
+      </div>
+    </>
   );
 };
 
