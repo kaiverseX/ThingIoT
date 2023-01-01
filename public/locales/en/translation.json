@@ -68,7 +68,15 @@
     "pageTitle": "Dashboard"
   },
   "device": {
-    "pageTitle": "Devices"
+    "pageTitle": "Devices",
+    "filter": {
+      "keyword": "Search by device name"
+    },
+    "deviceProfile": "Device profile",
+    "customer": "Customer",
+    "public": "Public",
+    "isGateway": "Is gateway",
+    "createAt": "Created time"
   },
   "setting": {
     "pageTitle": "Settings"

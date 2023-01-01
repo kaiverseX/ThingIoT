@@ -14,8 +14,10 @@ const axiosInstance = axios.create(httpConfig);
 const handleBeforeRequest = (config: AxiosRequestConfig) => {
   /**
    * We should NOT add `Authorization` into headers of every request.
+   * Use `http` or `httpNonAuth` helpers instead.
    *
-   * If needed, carefully consider the risk then uncomment the logic below to add `Authorization` header.
+   * If needed, consider the risk carefully,
+   * then uncomment the logic below to add `Authorization` header to every axios requests.
    */
   // const accessToken = usePersistStore.getState().accessToken;
   // if (config.headers && accessToken) {

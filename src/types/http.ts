@@ -2,11 +2,15 @@ export enum APIs {
   LOGIN = 'auth/login#response=login&useMock=false',
   LOGOUT = 'auth/logout',
   USER_INFO = 'auth/user',
+
+  DEVICES = 'tenant/deviceInfos',
 }
 
 export enum QueryKey {
   LOGIN = 'login',
   USER_INFO = 'user_info',
+
+  DEVICES = 'device_list',
 }
 
 export enum ErrorCode {

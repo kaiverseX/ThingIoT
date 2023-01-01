@@ -19,7 +19,6 @@ const Homepage = () => {
   useQuery({
     queryKey: [QueryKey.USER_INFO],
     queryFn: () => http.get<IUserData>(APIs.USER_INFO),
-    refetchOnWindowFocus: false,
     onSuccess: setUserData,
   });
 

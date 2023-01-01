@@ -27,7 +27,7 @@ const NotFound = () => {
           <Button onClick={() => navigate(Path.HOMEPAGE)}>{t('home.pageTitle')}</Button>
         </div>
         {srcImageRand.current ? (
-          <div>
+          <div className="w-full">
             <object type="image/svg+xml" data={Animated404}>
               404-svg-animation
             </object>
