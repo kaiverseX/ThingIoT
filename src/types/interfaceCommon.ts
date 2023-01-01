@@ -9,6 +9,25 @@ export interface IPagination {
   pageSizePool: number[];
 }
 
+export type TSortOrder = 'ASC' | 'DESC';
+
+export interface IFilter {
+  textSearch: string;
+
+  sortOrder: TSortOrder;
+  sortProperty: string;
+
+  page: number;
+  pageSize: number;
+}
+
+export interface IListResponse<T> {
+  data: T[];
+  hasNext: boolean;
+  totalElements: number;
+  totalPages: number;
+}
+
 export interface INavLinkChild {
   label: string;
   link?: string;

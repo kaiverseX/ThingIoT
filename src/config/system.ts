@@ -14,6 +14,8 @@ export const afkTimeout = safeAnyToNumber(import.meta.env.VITE_IDLE_TIMEOUT, 144
  */
 export const defaultLanguage = ESupportedLangCode.EN;
 
+export const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
+
 /**
  * Common components config
  */
