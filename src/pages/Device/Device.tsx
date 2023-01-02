@@ -1,48 +1,49 @@
-import {Title, TextInput, ThemeIcon} from '@mantine/core';
+import {TextInput, ThemeIcon, Title} from '@mantine/core';
 import {useForm} from '@mantine/form';
+import {useDebouncedValue} from '@mantine/hooks';
+import {IconCircleCheck, IconSearch} from '@tabler/icons';
 import {useQuery} from '@tanstack/react-query';
+import dayjs from 'dayjs';
+import {DataTableColumn} from 'mantine-datatable';
 import {useTranslation} from 'react-i18next';
-import {DataTable, DataTableColumn} from 'mantine-datatable';
+import {useSearchParams} from 'react-router-dom';
 
 import {DATE_TIME_FORMAT, paginationConfig} from '~/config/system';
 import {http} from '~/helper/http';
+import {safeAnyToNumber} from '~/util/primitiveHandle';
 
-import {Head} from '~/outlet/Head';
 import {APIs, QueryKey} from '~/types/http';
+import {IFilter, IListResponse, TSortOrder} from '~/types/interfaceCommon';
 import {IDeviceFilter, IDeviceList} from './types/device';
-import {IListResponse} from '~/types/interfaceCommon';
-import dayjs from 'dayjs';
-import {IconCircleCheck, IconSearch} from '@tabler/icons';
-import {useDebouncedValue} from '@mantine/hooks';
+
+import DataGrid from '~/components/DataGrid';
+import {Head} from '~/outlet/Head';
 
 const Device = () => {
   const {t} = useTranslation();
-  const {
-    values: filterValues,
-    setValues,
-    setFieldValue,
-  } = useForm<IDeviceFilter>({
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryParams = {
+    page: safeAnyToNumber(searchParams.get('page')),
+    pageSize: safeAnyToNumber(searchParams.get('pageSize'), paginationConfig.pageSizePool[0]),
+    sortOrder: (searchParams.get('sortOrder') as TSortOrder) || 'DESC',
+    sortProperty: searchParams.get('sortProperty') || '',
+  } as IFilter;
+
+  const {values: filterValues, setFieldValue} = useForm<IDeviceFilter>({
     initialValues: {
+      ...queryParams,
       textSearch: '',
       deviceProfileId: '',
-      page: 0,
-      pageSize: paginationConfig.pageSizePool[0],
-      sortOrder: 'DESC',
-      sortProperty: 'createdTime',
     },
   });
   const [searchDebounced] = useDebouncedValue(filterValues.textSearch, 400);
 
   const {data: deviceList, isLoading} = useQuery({
-    queryKey: [
-      QueryKey.DEVICES,
-      searchDebounced,
-      filterValues.page,
-      filterValues.pageSize,
-      filterValues.sortOrder,
-      filterValues.sortProperty,
-    ],
-    queryFn: () => http.get<IListResponse<IDeviceList>>(APIs.DEVICES, {params: filterValues}),
+    queryKey: [QueryKey.DEVICES, searchDebounced, queryParams],
+    queryFn: () =>
+      http.get<IListResponse<IDeviceList>>(APIs.DEVICES, {
+        params: {...filterValues, ...queryParams},
+      }),
     keepPreviousData: true,
   });
 
@@ -95,21 +96,11 @@ const Device = () => {
             aria-label="Filter by device name input"
           />
         </div>
-
-        <DataTable
-          className="flex-1"
+        <DataGrid
           fetching={isLoading}
-          records={deviceList?.data}
           columns={columnConfig}
-          page={filterValues.page + 1}
-          onPageChange={(p) => setFieldValue('page', p - 1)}
-          totalRecords={deviceList?.totalElements}
-          recordsPerPage={filterValues.pageSize}
-          recordsPerPageOptions={paginationConfig.pageSizePool}
-          onRecordsPerPageChange={(s) => setValues((v) => ({...v, page: 0, pageSize: s}))}
-          paginationSize="md"
-          verticalSpacing="sm"
-          highlightOnHover
+          records={deviceList?.data}
+          recordCount={deviceList?.totalElements}
         />
       </div>
     </>

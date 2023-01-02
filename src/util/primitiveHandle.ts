@@ -1,5 +1,5 @@
 // 0-255 → '00'-'ff'
-export const decimalToHex = (dec: any) => {
+export const decimalToHex = (dec: number) => {
   const tempHex = dec.toString(16);
   return (tempHex.length === 1 ? '0' : '') + tempHex;
   /**
@@ -14,7 +14,33 @@ export const generateUniqueString = () => {
   return Array.from(arr, decimalToHex).join('');
 };
 
-export const safeAnyToNumber = (inputVal: any, fallbackNum = 0) => {
+/**
+ * ⭐ Try to convert `inputVal` to a `number`. If it can't, return `fallbackNum` number.
+ *
+ * @param inputVal any `primitive` value.
+ * @param fallbackNum default: `0`
+ * @description
+ *___
+ * ⚠️ Attention should be paid if `inputVal` is an array.
+ * @example
+ * [] => 0 // same result with inputVal = [null] or [undefined]
+ * [12] => 12
+ * ['12'] => 12
+ * ['12', '13'] => fallbackNum
+ * '[12]' => fallbackNum
+ *
+ * [true | false] => fallbackNum
+ *
+ * [BigInt(9007199254740991)] => 9007199254740991
+ * [BigInt(9007199254740991000000)] => 9.007199254740991e+21
+ * ['BigInt(9007199254740991)'] => fallbackNum
+ * '[BigInt(9007199254740991)]' => fallbackNum
+ */
+export const safeAnyToNumber = (inputVal: unknown, fallbackNum = 0) => {
+  if (inputVal === null || typeof inputVal === 'symbol') {
+    return fallbackNum;
+  }
+
   const result = Number(inputVal);
   return isNaN(result) ? fallbackNum : result;
 };
