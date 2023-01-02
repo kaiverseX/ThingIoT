@@ -1,6 +1,6 @@
 import {MantineThemeOverride} from '@mantine/core';
 import {NotificationProviderProps} from '@mantine/notifications';
-import {IPagination, ESupportedLangCode} from '~/types/interfaceCommon';
+import {ESupportedLangCode} from '~/types/interfaceCommon';
 import {safeAnyToNumber} from '~/util/primitiveHandle';
 
 /**
@@ -19,9 +19,9 @@ export const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 /**
  * Common components config
  */
-export const paginationConfig: IPagination = {
-  pageSizePool: [10, 15, 20], // the default pageSize is value of the first element.
-};
+export const PAGESIZE_OPTIONS = [10, 15, 20];
+export const DEFAULT_PAGE = 1;
+export const DEFAULT_PAGESIZE = PAGESIZE_OPTIONS[0];
 
 /**
  * Mantine Theme: [docs](https://mantine.dev/theming/mantine-provider/).

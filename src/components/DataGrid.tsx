@@ -1,35 +1,75 @@
+import {useMemo} from 'react';
+import {useQuery} from '@tanstack/react-query';
 import {DataTable, DataTableProps} from 'mantine-datatable';
+import {showNotification} from '@mantine/notifications';
 import {useSearchParams} from 'react-router-dom';
-import {IFilter} from '~/types/interfaceCommon';
+
+import {http} from '~/helper/http';
+import {findNotiConfig} from '~/helper/notification';
+import {APIs, ENotiCode, QueryKey} from '~/types/http';
+import {IFilter, IListResponse} from '~/types/interfaceCommon';
 import {safeAnyToNumber} from '~/util/primitiveHandle';
-import {paginationConfig} from '~/config/system';
+import {DEFAULT_PAGE, DEFAULT_PAGESIZE, PAGESIZE_OPTIONS} from '~/config/system';
 
-const DataGrid = <T,>({recordCount, ...props}: DataTableProps<T> & {recordCount?: number}) => {
+interface IDataGridProps {
+  queryKey: QueryKey;
+  api: APIs;
+}
+
+const DataGrid = <T,>({columns, api, queryKey, ...props}: IDataGridProps & DataTableProps<T>) => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const getParamsObject = Object.fromEntries(searchParams);
 
-  const {page, pageSize} = {
-    page: safeAnyToNumber(searchParams.get('page')) + 1,
-    pageSize: safeAnyToNumber(searchParams.get('pageSize'), paginationConfig.pageSizePool[0]),
-    // sortOrder: (searchParams.get('sortOrder') as TSortOrder) || 'DESC',
-    // sortProperty: searchParams.get('sortProperty') || '',
-  } as IFilter;
+  const queryParams = useMemo<IFilter>(
+    () => ({
+      ...getParamsObject,
+      page: safeAnyToNumber(getParamsObject.page, DEFAULT_PAGE) - 1,
+      pageSize: safeAnyToNumber(getParamsObject.pageSize, DEFAULT_PAGESIZE),
+      sortOrder: getParamsObject.sortOrder !== 'DESC' ? 'ASC' : 'DESC',
+      sortProperty: getParamsObject.sortProperty || '',
+    }),
+    [searchParams],
+  );
 
-  const updateSearchParams = (param: {[k: string]: string | number}) => {
-    setSearchParams((v) => ({...v, ...param}), {replace: true});
+  const {data: listData, isFetching} = useQuery({
+    queryKey: [queryKey, queryParams],
+    queryFn: () => http.get<IListResponse<T>>(api, {params: queryParams}),
+    keepPreviousData: true,
+    onSuccess: ({totalElements}) => {
+      if (totalElements === undefined || !queryParams.page) {
+        return;
+      }
+
+      const isPagingOutRange = queryParams.page * queryParams.pageSize + 1 > totalElements;
+      if (!isPagingOutRange) {
+        return;
+      }
+      showNotification(findNotiConfig(ENotiCode.PAGING_OUT_RANGE));
+      updateSearchParams({page: DEFAULT_PAGE.toString()});
+    },
+  });
+
+  const updateSearchParams = (param: {[k: string]: string}) => {
+    setSearchParams({...getParamsObject, ...param}, {replace: true});
   };
 
   return (
-    <DataTable
-      className="flex-1"
-      page={page}
-      onPageChange={(p) => updateSearchParams({page: p - 1})}
-      totalRecords={recordCount || 0}
-      recordsPerPage={pageSize}
-      recordsPerPageOptions={paginationConfig.pageSizePool}
-      onRecordsPerPageChange={(s) => updateSearchParams({page: 0, pageSize: s})}
+    <DataTable<T>
+      fetching={isFetching}
+      columns={columns}
+      records={listData?.data}
+      totalRecords={listData?.totalElements}
+      page={queryParams.page + 1}
+      onPageChange={(p) => updateSearchParams({page: p.toString()})}
+      recordsPerPage={queryParams.pageSize}
+      recordsPerPageOptions={PAGESIZE_OPTIONS}
+      onRecordsPerPageChange={(s) =>
+        updateSearchParams({page: DEFAULT_PAGE.toString(), pageSize: s.toString()})
+      }
       paginationSize="md"
       verticalSpacing="sm"
-      highlightOnHover
+      verticalAlignment="center"
+      // highlightOnHover
       {...props}
     />
   );

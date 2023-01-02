@@ -45,7 +45,7 @@
     "spaced-comment": ["error", "always", {"markers": ["/"]}],
     "quotes": ["warn", "single"],
     "no-duplicate-imports": "error",
-    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": ["warn", {"ignoreRestSiblings": true}],
     "tailwindcss/no-custom-classname": ["warn", {"whitelist": ["line-clamp-[1-9]{1}[0-9]?", "card-primary", "flex-center-between"]}]
   }
 }

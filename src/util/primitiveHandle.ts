@@ -15,7 +15,7 @@ export const generateUniqueString = () => {
 };
 
 /**
- * ⭐ Try to convert `inputVal` to a `number`. If it can't, return `fallbackNum` number.
+ * Try to convert `inputVal` to a `number`. If it can't, return `fallbackNum` number.
  *
  * @param inputVal any `primitive` value.
  * @param fallbackNum default: `0`

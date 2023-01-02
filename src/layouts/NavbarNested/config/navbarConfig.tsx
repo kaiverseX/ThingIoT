@@ -18,7 +18,7 @@ export const nestedNavbarConfig: INavLink[] = [
   {
     label: t('device.pageTitle'),
     icon: IconCpu,
-    link: Path.Device,
+    link: Path.DEVICES,
   },
   {
     label: t('setting.pageTitle'),

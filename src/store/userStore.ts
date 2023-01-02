@@ -1,4 +1,3 @@
-import {MantineThemeColors} from '@mantine/core';
 import {StateCreator} from 'zustand';
 import {IUserData} from '~/types/interfaceCommon';
 import {IPersistStore, IUserStore} from '~/types/interfaceStore';
@@ -10,8 +9,6 @@ export const defaultUserData: IUserData = {
   lastName: '',
 };
 
-export const defaultTheme: keyof MantineThemeColors = 'teal';
-
 export const createUserSlice: StateCreator<
   IPersistStore,
   [['zustand/persist', unknown]],
@@ -20,7 +17,5 @@ export const createUserSlice: StateCreator<
 > = (set) => ({
   userData: defaultUserData,
   setUserData: (userData) => set(() => ({userData})),
-  theme: defaultTheme,
-  setTheme: (theme) => set(() => ({theme})),
-  resetUserStore: () => set(() => ({userData: defaultUserData}), true),
+  resetUserStore: () => set(() => ({userData: defaultUserData})),
 });
