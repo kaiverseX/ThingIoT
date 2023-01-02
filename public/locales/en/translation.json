@@ -1,5 +1,6 @@
 {
   "common": {
+    "appName": "Deviceverse",
     "loading": "Loading",
     "theme": {
       "dark": "Dark mode",
@@ -8,6 +9,7 @@
     },
     "add": "Add",
     "close": "Close",
+    "actions": "Actions",
     "afk": {
       "title": "Standby mode",
       "description": "Switched to standby mode to reduce unnecessary data transmission.\nAre you there? It's been more than {{afkTime}} minutes with no action detected!",
@@ -32,6 +34,9 @@
       "page_size": "{{size}}/page"
     },
     "success": "Data was loaded.",
+    "info": {
+      "paging_out_range": "Your page number request has no data, showing the first page."
+    },
     "error": {
       "network": {
         "title": "Network Issue",
@@ -72,6 +77,8 @@
     "filter": {
       "keyword": "Search by device name"
     },
+    "add": "Add Device",
+    "detail": "Device details",
     "deviceProfile": "Device profile",
     "customer": "Customer",
     "public": "Public",

@@ -3,14 +3,14 @@ import {usePersistStore} from '~/store';
 
 const ThemeColors = () => {
   const setTheme = usePersistStore((state) => state.setTheme);
-  const theme = useMantineTheme();
+  const {colors} = useMantineTheme();
 
-  const swatches = Object.keys(theme.colors).map((color) => (
+  const swatches = Object.keys(colors).map((color) => (
     <ColorSwatch
       key={color}
       className="cursor-pointer opacity-80 hover:opacity-100 hover:shadow-lg"
       component="button"
-      color={theme.colors[color][6]}
+      color={colors[color][6]}
       size={40}
       onClick={() => setTheme(color)}
     />

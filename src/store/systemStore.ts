@@ -1,7 +1,26 @@
 import {StateCreator} from 'zustand';
-import {ISystemStore} from '~/types/interfaceStore';
+import {
+  IPersistStore,
+  ISystemPersistStore,
+  ISystemPersistState,
+  ISystemStore,
+} from '~/types/interfaceStore';
 
-export const createSystemSlice: StateCreator<ISystemStore> = (set) => ({
-  setAccountInfo: (accountInfo) => set(() => ({accountInfo})), // accountInfo is currently unused
-  resetSystemStore: () => set(() => ({}), true),
+const defaultSystemState: ISystemPersistState = {
+  theme: 'teal',
+};
+
+export const createSystemSlice: StateCreator<ISystemStore> = () => ({
+  resetSystemStore: () => undefined,
+});
+
+export const createSystemPersistSlice: StateCreator<
+  IPersistStore,
+  [['zustand/persist', unknown]],
+  [],
+  ISystemPersistStore
+> = (set) => ({
+  ...defaultSystemState,
+  setTheme: (theme) => set(() => ({theme})),
+  resetPersistedSystemStore: () => set(defaultSystemState),
 });

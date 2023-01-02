@@ -46,7 +46,7 @@ specifiers:
   vite-plugin-svgr: ^2.2.2
   vite-tsconfig-paths: ^3.6.0
   yup: ^0.32.11
-  zustand: ^4.1.4
+  zustand: ^4.2.0
 
 dependencies:
   '@emotion/react': 11.10.5_kzbn2opkn2327fwg5yzwzya5o4
@@ -75,7 +75,7 @@ dependencies:
   vite-plugin-svgr: 2.4.0_vite@3.2.5
   vite-tsconfig-paths: 3.6.0_vite@3.2.5
   yup: 0.32.11
-  zustand: 4.1.5_react@18.2.0
+  zustand: 4.2.0_react@18.2.0
 
 devDependencies:
   '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.4
@@ -3705,8 +3705,8 @@ packages:
       toposort: 2.0.2
     dev: false
 
-  /zustand/4.1.5_react@18.2.0:
-    resolution: {integrity: sha512-PsdRT8Bvq22Yyh1tvpgdHNE7OAeFKqJXUxtJvj1Ixw2B9O2YZ1M34ImQ+xyZah4wZrR4lENMoDUutKPpyXCQ/Q==}
+  /zustand/4.2.0_react@18.2.0:
+    resolution: {integrity: sha512-eNwaDoD2FYVnMgtNxiMUhTJO780wonZUzJrPQTLYI0erSIMZF8cniWFW22kGQUECd8rdHRJ/ZJL2XO54c9Ttuw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       immer: '>=9.0'

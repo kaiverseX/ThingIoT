@@ -5,17 +5,16 @@ export enum ESupportedLangCode {
   EN = 'en',
 }
 
-export interface IPagination {
-  pageSizePool: number[];
-}
-
 export type TSortOrder = 'ASC' | 'DESC';
 
-export interface IFilter {
-  textSearch: string;
+export interface IBreadcrumbs {
+  data: {title: string; url?: string}[];
+  separator?: ReactNode;
+}
 
-  sortOrder: TSortOrder;
-  sortProperty: string;
+export interface IFilter {
+  sortOrder?: TSortOrder;
+  sortProperty?: string;
 
   page: number;
   pageSize: number;
@@ -63,8 +62,4 @@ export interface IUserData {
   additionalInfo?: JSON;
 
   createdTime?: number;
-}
-
-export interface IAccountInfo {
-  name: string;
 }

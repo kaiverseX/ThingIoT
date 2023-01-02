@@ -1,23 +1,12 @@
-import {Suspense, lazy} from 'react';
-import {useLocation, useRoutes} from 'react-router-dom';
-import {
-  AppShell,
-  ColorScheme,
-  ColorSchemeProvider,
-  LoadingOverlay,
-  MantineProvider,
-} from '@mantine/core';
+import {Suspense} from 'react';
+import {useRoutes} from 'react-router-dom';
+import {ColorScheme, ColorSchemeProvider, LoadingOverlay, MantineProvider} from '@mantine/core';
 import {useColorScheme, useLocalStorage} from '@mantine/hooks';
 import {NotificationsProvider} from '@mantine/notifications';
 
 import {defaultLanguage, mantineTheme, notificationPosition} from './config/system';
 import routesConfig from './config/routesConfig';
-import {Path} from './config/path';
 import {usePersistStore} from './store';
-
-const AppHeader = lazy(() => import('~/layouts/AppHeader'));
-const NavbarNested = lazy(() => import('~/layouts/NavbarNested'));
-const ScrollTop = lazy(() => import('~/features/ScrollTop'));
 
 const App = () => {
   const defaultColorScheme = useColorScheme();
@@ -28,7 +17,6 @@ const App = () => {
     defaultValue: defaultColorScheme,
     getInitialValueInEffect: true,
   });
-  const {pathname} = useLocation();
   const routers = useRoutes(routesConfig);
 
   const toggleColorScheme = (value?: ColorScheme) =>
@@ -49,21 +37,7 @@ const App = () => {
           <Suspense
             fallback={<LoadingOverlay overlayOpacity={0.3} transitionDuration={500} visible />}
           >
-            <AppShell
-              className={colorScheme}
-              padding="md"
-              {...(pathname === Path.LOGIN
-                ? {
-                    styles: () => ({main: {padding: 0}}),
-                  }
-                : {
-                    header: <AppHeader />,
-                    navbar: <NavbarNested />,
-                  })}
-            >
-              {routers}
-              <ScrollTop />
-            </AppShell>
+            {routers}
           </Suspense>
         </NotificationsProvider>
       </MantineProvider>

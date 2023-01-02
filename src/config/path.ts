@@ -1,7 +1,12 @@
 export enum Path {
   HOMEPAGE = '/',
   LOGIN = '/login',
-  Device = '/devices',
+  UPDATE = '/update',
+
+  DEVICES = '/devices',
+  DEVICE_CREATE = '/devices/create',
+  DEVICE_DETAIL = '/devices/:id/detail',
+  DEVICE_UPDATE = '/devices/:id/update',
 
   RELEASES = '/releases',
   RELEASES_UPCOMING = '/upcoming',

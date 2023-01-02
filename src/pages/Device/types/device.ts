@@ -1,14 +1,18 @@
-import {IFilter} from '~/types/interfaceCommon';
-
-export interface IDeviceFilter extends IFilter {
+export interface IDeviceFilter {
+  textSearch: string;
+  deviceProfileId: string;
   type?: string;
-  deviceProfileId?: string;
 }
 
 export interface IDeviceList {
   name: string;
   type: string;
   label?: string;
+
+  id: {
+    id: string;
+    entityType: string;
+  };
 
   deviceProfileId: {
     id: string;
@@ -26,4 +30,28 @@ export interface IDeviceList {
   };
 
   createdTime: number;
+}
+
+export interface IDeviceDetail extends IDeviceList {
+  tenantId: {
+    entityType: string;
+    id: string;
+  };
+
+  customerId: {
+    entityType: string;
+    id: string;
+  };
+  deviceData: {
+    configuration: {
+      type: string;
+    };
+    transportConfiguration: {
+      type: string;
+    };
+  };
+
+  firmwareId: string | null;
+  softwareId: string | null;
+  externalId: string | null;
 }

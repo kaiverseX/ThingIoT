@@ -12,7 +12,7 @@ interface ICarouselProps extends CarouselProps {
 }
 
 /**
- * ⭐ An customizable Carousel component.
+ * An customizable Carousel component.
  *___
  * @param images array of urls or imported asset images for a slide of images.
  * @param imageProps custom props for `images`. It will be useless when render customize content with `contents`.

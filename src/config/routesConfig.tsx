@@ -4,7 +4,12 @@ import {Path} from './path';
 
 const PrivateOutlet = lazy(() => import('~/outlet/PrivateOutlet'));
 const Homepage = lazy(() => import('~/pages/Homepage'));
+
 const Device = lazy(() => import('~/pages/Device'));
+const DeviceCreate = lazy(() => import('~/pages/Device/DeviceCreate'));
+const DeviceDetail = lazy(() => import('~/pages/Device/DeviceDetail'));
+const DeviceUpdate = lazy(() => import('~/pages/Device/DeviceUpdate'));
+
 const Setting = lazy(() => import('~/pages/Setting'));
 const NotFound = lazy(() => import('~/pages/NotFound'));
 const Login = lazy(() => import('~/pages/Login'));
@@ -24,8 +29,29 @@ const routesConfig: RouteObject[] = [
         element: <Homepage />,
       },
       {
-        path: Path.Device,
-        element: <Device />,
+        path: Path.DEVICES,
+        children: [
+          {
+            index: true,
+            element: <Device />,
+          },
+          {
+            path: Path.DEVICE_CREATE,
+            element: <DeviceCreate />,
+          },
+          {
+            path: Path.DEVICE_DETAIL,
+            element: <DeviceDetail />,
+          },
+          {
+            path: Path.DEVICE_UPDATE,
+            element: <DeviceUpdate />,
+          },
+        ],
+      },
+      {
+        path: Path.DEVICE_UPDATE,
+        element: <DeviceUpdate />,
       },
       {
         path: Path.SETTING,

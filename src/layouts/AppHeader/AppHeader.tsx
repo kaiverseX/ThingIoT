@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {
   ActionIcon,
@@ -25,6 +25,7 @@ const AppHeader = () => {
   const {t} = useTranslation();
   const {userData, resetUserStore, resetAuthStore} = usePersistStore();
   const {colorScheme, toggleColorScheme} = useMantineColorScheme();
+
   const isDarkMode = colorScheme === 'dark';
   const decorBgRand = Math.floor(Math.random() * 4) + 1;
 
@@ -57,6 +58,7 @@ const AppHeader = () => {
           Deviceverse
         </span>
       </Link>
+
       <div className="flex-center-between">
         <Tooltip withArrow label={t(`common.theme.${colorScheme}`)}>
           <ActionIcon

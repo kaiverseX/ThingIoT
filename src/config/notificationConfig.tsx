@@ -1,4 +1,4 @@
-import {ErrorCode} from '../types/http';
+import {ENotiCode, ErrorCode} from '../types/http';
 import {INotiConfig} from '~/types/interfaceNotification';
 
 import {IconExclamationMark, IconWifiOff} from '@tabler/icons';
@@ -10,6 +10,10 @@ export const notificationConfig: INotiConfig[] = [
     message: t('common.error.sth_wrong.action'),
     color: 'red',
     icon: <IconExclamationMark />,
+  },
+  {
+    code: ENotiCode.PAGING_OUT_RANGE,
+    message: t('common.info.paging_out_range'),
   },
   // {
   //   code: ErrorCode.ERR_SOCKET,
