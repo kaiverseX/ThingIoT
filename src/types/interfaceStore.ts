@@ -1,5 +1,5 @@
 import {MantineThemeColors} from '@mantine/core';
-import {IUserData} from './interfaceCommon';
+import {IBreadcrumbs, IUserData} from './interfaceCommon';
 
 export interface IAuthState {
   uid?: string;
@@ -34,7 +34,15 @@ export interface ISystemPersistStore extends ISystemPersistState {
   resetPersistedSystemStore: () => void;
 }
 
-export interface ISystemStore {
+export interface ISystemState {
+  contentHeader?: {
+    title?: string;
+    breadcrumbData?: IBreadcrumbs['data'];
+  };
+}
+
+export interface ISystemStore extends ISystemState {
+  setContentHeader: (contentHeader: ISystemState['contentHeader']) => void;
   resetSystemStore: () => void;
 }
 

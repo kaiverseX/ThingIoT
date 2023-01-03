@@ -8,8 +8,15 @@
       "switch": "Toggle color scheme mode"
     },
     "add": "Add",
+    "create": "Create",
+    "update": "Update",
     "close": "Close",
     "actions": "Actions",
+    "name": "Name",
+    "label": "Label",
+    "description": "Description",
+    "no_data": "No Data",
+
     "afk": {
       "title": "Standby mode",
       "description": "Switched to standby mode to reduce unnecessary data transmission.\nAre you there? It's been more than {{afkTime}} minutes with no action detected!",
@@ -33,6 +40,7 @@
       "info": "{{startIndex}} - {{endIndex}} of {{totalRecords}} records",
       "page_size": "{{size}}/page"
     },
+
     "success": "Data was loaded.",
     "info": {
       "paging_out_range": "Your page number request has no data, showing the first page."
@@ -56,7 +64,10 @@
     }
   },
   "auth": {
-    "unknown": "Unknown user"
+    "unknown": "Unknown user",
+    "validation": {
+      "password": "Password must contain at least 8 characters"
+    }
   },
   "home": {
     "pageTitle": "Homepage",
@@ -79,11 +90,19 @@
     },
     "add": "Add Device",
     "detail": "Device details",
+    "name": "Device Name",
     "deviceProfile": "Device profile",
     "customer": "Customer",
     "public": "Public",
     "isGateway": "Is gateway",
-    "createAt": "Created time"
+    "overwriteActivityTime": "Overwrite activity time for connected device",
+    "createAt": "Created time",
+
+    "validation": {
+      "name": "Name is required",
+      "label": "Label is required",
+      "deviceProfile": "Device Profile is required"
+    }
   },
   "setting": {
     "pageTitle": "Settings"

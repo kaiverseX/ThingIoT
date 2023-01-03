@@ -22,7 +22,7 @@ import {APIs, QueryKey} from '~/types/http';
 
 import DataGrid from '~/components/DataGrid';
 import {Head} from '~/outlet/Head';
-import CommonHeader from '~/layouts/List/CommonHeader';
+import CommonHeader from '~/layouts/Common/CommonHeader';
 import {Path} from '~/config/path';
 
 const Device = () => {

@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "build:stg": "tsc && vite build --mode staging",
     "preview": "vite preview",
-    "lint": "tsc && eslint ./src --ext ts,tsx --quiet && prettier --check \"src/**/*.{ts,tsx,scss}\"",
+    "lint": "tsc && eslint ./src --ext ts,tsx && prettier --check \"src/**/*.{ts,tsx,scss}\"",
     "lint--fix": "eslint ./src --ext ts,tsx --quiet --fix && prettier --write \"src/**/*.{ts,tsx,scss}\"",
     "format": "prettier --write \"src/**/*.{ts,tsx,scss}\""
   },
@@ -38,7 +38,7 @@
     "react-router-dom": "^6.4.3",
     "vite-plugin-svgr": "^2.2.2",
     "vite-tsconfig-paths": "^3.6.0",
-    "yup": "^0.32.11",
+    "zod": "^3.20.2",
     "zustand": "^4.2.0"
   },
   "devDependencies": {

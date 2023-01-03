@@ -4,14 +4,21 @@ import {
   ISystemPersistStore,
   ISystemPersistState,
   ISystemStore,
+  ISystemState,
 } from '~/types/interfaceStore';
 
-const defaultSystemState: ISystemPersistState = {
+const defaultPersistState: ISystemPersistState = {
   theme: 'teal',
 };
 
-export const createSystemSlice: StateCreator<ISystemStore> = () => ({
-  resetSystemStore: () => undefined,
+const defaultState: ISystemState = {
+  contentHeader: undefined,
+};
+
+export const createSystemSlice: StateCreator<ISystemStore> = (set) => ({
+  ...defaultState,
+  setContentHeader: (contentHeader) => set(() => ({contentHeader})),
+  resetSystemStore: () => set(defaultState),
 });
 
 export const createSystemPersistSlice: StateCreator<
@@ -20,7 +27,7 @@ export const createSystemPersistSlice: StateCreator<
   [],
   ISystemPersistStore
 > = (set) => ({
-  ...defaultSystemState,
+  ...defaultPersistState,
   setTheme: (theme) => set(() => ({theme})),
-  resetPersistedSystemStore: () => set(defaultSystemState),
+  resetPersistedSystemStore: () => set(defaultPersistState),
 });

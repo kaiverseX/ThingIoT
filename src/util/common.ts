@@ -15,8 +15,9 @@ export const milisecondsToMinutesRound = (miliseconds: number): number => {
  * @example
  * safeStringToJSON('null'|'123'|'abc'|'undefined') => undefined
  * safeStringToJSON(null|123|undefined) => undefined
- * safeStringToJSON('{...any}') => ({...any})
+ * safeStringToJSON('{...anything}') => ({...anything})
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const safeAnyToJSON = (input: any) => {
   try {
     const result = JSON.parse(input);

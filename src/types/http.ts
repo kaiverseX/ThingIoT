@@ -5,6 +5,8 @@ export enum APIs {
 
   DEVICES = 'tenant/deviceInfos',
   DEVICE_DETAIL = 'device/info/:id',
+  DEVICE_MUTATE = 'device',
+  DEVICE_PROFILES = 'deviceProfileInfos',
 }
 
 export enum QueryKey {
@@ -13,6 +15,7 @@ export enum QueryKey {
 
   DEVICES = 'device_list',
   DEVICE_DETAIL = 'device_list',
+  DEVICE_PROFILE = 'device_profile_infos',
 }
 
 export enum ErrorCode {

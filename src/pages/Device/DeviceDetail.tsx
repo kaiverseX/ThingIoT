@@ -2,13 +2,13 @@ import {useQuery} from '@tanstack/react-query';
 import {useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
 import {generatePath, useParams} from 'react-router-dom';
-import Breadcrumb from '~/components/Breadcrumb';
 import {Path} from '~/config/path';
 import {http} from '~/helper/http';
-import CommonHeader from '~/layouts/List/CommonHeader';
+import CommonHeader from '~/layouts/Common/CommonHeader';
 import {Head} from '~/outlet/Head';
 import {APIs, QueryKey} from '~/types/http';
 import {IBreadcrumbs} from '~/types/interfaceCommon';
+import GridNotes from '../DemoUI/components/GridNotes';
 import {IDeviceDetail} from './types/device';
 
 const DeviceDetail = () => {
@@ -35,9 +35,10 @@ const DeviceDetail = () => {
     <>
       <Head title={pageTitle} />
       <div>
-        <Breadcrumb data={breadcrumbData} />
-        <CommonHeader title={pageTitle} />
+        <CommonHeader title={pageTitle} breadcrumbData={breadcrumbData} />
         {isLoading ? 'Loading' : 'Details'}
+
+        <GridNotes />
       </div>
     </>
   );
