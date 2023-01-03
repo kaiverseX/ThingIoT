@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useMemo} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {
   TextInput,
@@ -12,24 +12,19 @@ import {
   useMantineColorScheme,
   LoadingOverlay,
 } from '@mantine/core';
-import * as Yup from 'yup';
+import {z} from 'zod';
 import {usePersistStore} from '~/store';
 import {Path} from '~/config/path';
 import {Head} from '~/outlet/Head';
 import {IconMoonStars, IconSun} from '@tabler/icons';
 import {useTranslation} from 'react-i18next';
-import {useForm, yupResolver} from '@mantine/form';
+import {useForm, zodResolver} from '@mantine/form';
 import {ILoginForm, ILoginResponse} from './types/login';
 import {useMutation} from '@tanstack/react-query';
 import {http} from '~/helper/http';
 import {APIs} from '~/types/http';
 
 import LoginBgImg from '~/assets/img/iot.webp';
-
-const validationSchema = Yup.object().shape({
-  username: Yup.string().required(),
-  password: Yup.string().required(),
-});
 
 const Login = () => {
   const navigate = useNavigate();
@@ -46,9 +41,19 @@ const Login = () => {
     },
   });
 
+  const validationSchema = useMemo(
+    () =>
+      z.object({
+        username: z.string().email(),
+        password: z.string().min(8, t('auth.validation.password')),
+      }),
+    [],
+  );
+
   const loginForm = useForm<ILoginForm>({
     initialValues: {username: '', password: ''},
-    validate: yupResolver(validationSchema),
+    validate: zodResolver(validationSchema),
+    validateInputOnChange: true,
   });
 
   const handleLogin = (values: ILoginForm) => {
@@ -85,7 +90,7 @@ const Login = () => {
             <Title align="center">Welcome back!</Title>
             <form id="form-login" className="my-4" onSubmit={loginForm.onSubmit(handleLogin)}>
               <TextInput
-                label="Username"
+                label="Email"
                 placeholder="you@gmail.com"
                 withAsterisk
                 {...loginForm.getInputProps('username')}

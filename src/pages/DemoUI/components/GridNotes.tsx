@@ -18,7 +18,7 @@ const GridNotes = () => {
   ));
 
   return (
-    <div className="my-4 grid grid-cols-[repeat(auto-fill,minmax(18rem,_1fr))] grid-rows-[masonry] gap-4">
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(18rem,_1fr))] grid-rows-[masonry] gap-4 py-4">
       <CarouselCard />
       {renderNoteList}
     </div>
