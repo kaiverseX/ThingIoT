@@ -7,4 +7,5 @@ interface ImportMetaEnv {
   VITE_API_SOCKET_URI: string;
   VITE_SERVICE_NAME: string;
   VITE_IDLE_TIMEOUT: number;
+  VITE_DEBOUNCE_TIME: number;
 }

@@ -1,9 +1,11 @@
 import {Autocomplete, Loader, ActionIcon} from '@mantine/core';
 import {UseFormReturnType} from '@mantine/form';
+import {useDebouncedValue} from '@mantine/hooks';
 import {IconX} from '@tabler/icons';
 import {useQuery} from '@tanstack/react-query';
 import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
+import {DEBOUNCE_TIME} from '~/config/system';
 import {http} from '~/helper/http';
 import {QueryKey, APIs} from '~/types/http';
 import {IListResponse} from '~/types/interfaceCommon';
@@ -35,10 +37,11 @@ const AutocompleteAsync = <T, TItem>({
 }) => {
   const {t} = useTranslation();
   const [textSearch, setTextSearch] = useState('');
+  const [textSearchDebounced] = useDebouncedValue(textSearch, DEBOUNCE_TIME);
 
   const fieldValue = form.values[controlField];
   const filterAutocomplete = {
-    textSearch,
+    textSearchDebounced,
     page: 0,
     pageSize: 100,
     sortOrder: 'ASC',
@@ -46,7 +49,7 @@ const AutocompleteAsync = <T, TItem>({
   };
 
   const {data: listDeviceProfiles, isFetching} = useQuery({
-    queryKey: [queryKey, filterAutocomplete],
+    queryKey: [queryKey, textSearchDebounced],
     queryFn: () => http.get<IListResponse<TItem>>(api, {params: filterAutocomplete}),
     keepPreviousData: true,
   });
@@ -88,7 +91,7 @@ const AutocompleteAsync = <T, TItem>({
   );
 };
 
-// The Select component still can't fit with requirement and it has some bugs with below implementation.
+// The Select component still can't fit with requirement and it has some UI bugs with below implementation.
 // <Select
 //   label={t('device.deviceProfile')}
 //   value={formDeviceValues.deviceProfileId?.id}

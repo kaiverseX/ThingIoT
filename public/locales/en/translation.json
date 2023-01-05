@@ -37,7 +37,7 @@
       "cancel_request": "Operation canceled due to new request."
     },
     "pagination": {
-      "info": "{{startIndex}} - {{endIndex}} of {{totalRecords}} records",
+      "info": "{{from}} - {{to}} / {{totalRecords}} records",
       "page_size": "{{size}}/page"
     },
 

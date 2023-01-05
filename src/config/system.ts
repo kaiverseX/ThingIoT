@@ -7,7 +7,8 @@ import {safeAnyToNumber} from '~/util/primitiveHandle';
  * Get & process environment variables (.env)
  */
 export const SERVICE_NAME = import.meta.env.VITE_SERVICE_NAME;
-export const afkTimeout = safeAnyToNumber(import.meta.env.VITE_IDLE_TIMEOUT, 14400000); // 4 hours
+export const AFK_TIMEOUT = safeAnyToNumber(import.meta.env.VITE_IDLE_TIMEOUT, 14400000); // 4 hours
+export const DEBOUNCE_TIME = safeAnyToNumber(import.meta.env.VITE_DEBOUNCE_TIME, 400);
 
 /**
  * Language config

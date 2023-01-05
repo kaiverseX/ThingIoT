@@ -16,7 +16,7 @@ import {DataTableColumn} from 'mantine-datatable';
 import {useTranslation} from 'react-i18next';
 import {generatePath, Link, useSearchParams} from 'react-router-dom';
 
-import {DATE_TIME_FORMAT, DEFAULT_PAGE} from '~/config/system';
+import {DATE_TIME_FORMAT, DEBOUNCE_TIME, DEFAULT_PAGE} from '~/config/system';
 import {IDeviceFilter, IDeviceList} from './types/device';
 import {APIs, QueryKey} from '~/types/http';
 
@@ -34,7 +34,7 @@ const Device = () => {
       deviceProfileId: '',
     },
   });
-  const [searchDebounced] = useDebouncedValue(filterValues.textSearch, 400);
+  const [searchDebounced] = useDebouncedValue(filterValues.textSearch, DEBOUNCE_TIME);
 
   const renderBooleanCol = (positive?: boolean) =>
     positive ? (

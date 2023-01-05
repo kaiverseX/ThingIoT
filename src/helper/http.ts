@@ -12,6 +12,10 @@ const getAuthConfig = (config?: AxiosRequestConfig) => {
   const accessToken = usePersistStore.getState().accessToken;
   const customHttpConfig = {...HttpConfig, ...config};
   if (customHttpConfig.headers && accessToken) {
+    /**
+     * @todo upgrade axios version after this issue https://github.com/axios/axios/issues/5416 fixed.
+     */
+    // (customHttpConfig.headers as AxiosHeaders).set('Authorization', `Bearer ${accessToken}`);
     customHttpConfig.headers.Authorization = `Bearer ${accessToken}`;
   }
 

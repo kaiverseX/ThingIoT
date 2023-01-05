@@ -10,6 +10,7 @@ import {APIs, ENotiCode, QueryKey} from '~/types/http';
 import {IFilter, IListResponse} from '~/types/interfaceCommon';
 import {safeAnyToNumber} from '~/util/primitiveHandle';
 import {DEFAULT_PAGE, DEFAULT_PAGESIZE, PAGESIZE_OPTIONS} from '~/config/system';
+import {useTranslation} from 'react-i18next';
 
 interface IDataGridProps {
   queryKey: QueryKey;
@@ -17,6 +18,7 @@ interface IDataGridProps {
 }
 
 const DataGrid = <T,>({columns, api, queryKey, ...props}: IDataGridProps & DataTableProps<T>) => {
+  const {t} = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const getParamsObject = Object.fromEntries(searchParams);
 
@@ -67,6 +69,9 @@ const DataGrid = <T,>({columns, api, queryKey, ...props}: IDataGridProps & DataT
         updateSearchParams({page: DEFAULT_PAGE.toString(), pageSize: s.toString()})
       }
       paginationSize="md"
+      paginationText={({from, to, totalRecords}) =>
+        `${t('common.pagination.info', {from, to, totalRecords})}`
+      }
       verticalSpacing="sm"
       verticalAlignment="center"
       // highlightOnHover

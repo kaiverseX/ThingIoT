@@ -34,7 +34,7 @@ const CarouselFull = ({
 
   const renderImageSlides = images?.map((image) => (
     <Carousel.Slide key={image}>
-      <Image src={image} withPlaceholder {...imageProps} />
+      <Image src={image} withPlaceholder {...imageProps} imageProps={{loading: 'lazy'}} />
     </Carousel.Slide>
   ));
 
