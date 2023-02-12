@@ -1,0 +1,41 @@
+{
+  "id": {
+    "entityType": "DEVICE_PROFILE",
+    "id": "6f5fd650-9b89-11ed-a3a7-a370cc0b9cb6"
+  },
+  "createdTime": 1674525009973,
+  "tenantId": {
+    "entityType": "TENANT",
+    "id": "23098350-04f7-11e9-a1f6-a3a281c054e4"
+  },
+  "name": "DP2401",
+  "description": null,
+  "image": null,
+  "type": "DEFAULT",
+  "transportType": "DEFAULT",
+  "provisionType": "DISABLED",
+  "defaultRuleChainId": {
+    "entityType": "RULE_CHAIN",
+    "id": "230e6550-04f7-11e9-a1f6-a3a281c054e4"
+  },
+  "defaultDashboardId": null,
+  "defaultQueueName": "HighPriority",
+  "profileData": {
+    "configuration": {
+      "type": "DEFAULT"
+    },
+    "transportConfiguration": {
+      "type": "DEFAULT"
+    },
+    "provisionConfiguration": {
+      "type": "DISABLED",
+      "provisionDeviceSecret": null
+    },
+    "alarms": null
+  },
+  "provisionDeviceKey": null,
+  "firmwareId": null,
+  "softwareId": null,
+  "externalId": null,
+  "default": false
+}

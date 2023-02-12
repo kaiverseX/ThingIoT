@@ -40,7 +40,7 @@ export const DEFAULT_PAGESIZE = PAGESIZE_OPTIONS[0];
  * 3️⃣ Remove deprecated/name changed Tailwind palettes from step 2️⃣'s result object. ref: [docs](https://tailwindcss.com/docs/upgrade-guide#color-palette-changes).
  * 
  * 4️⃣ Add new color schema to this config.
- * 
+ * ___
  * Additional info: [Tailwind's palette list](https://tailwindcss.com/docs/customizing-colors)
  */
 const mantineThemeConfig: MantineThemeOverride = {

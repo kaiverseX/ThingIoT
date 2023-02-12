@@ -1,4 +1,4 @@
-import {Autocomplete, Loader, ActionIcon} from '@mantine/core';
+import {Autocomplete, Loader, ActionIcon, AutocompleteProps} from '@mantine/core';
 import {UseFormReturnType} from '@mantine/form';
 import {useDebouncedValue} from '@mantine/hooks';
 import {IconX} from '@tabler/icons';
@@ -10,6 +10,14 @@ import {http} from '~/helper/http';
 import {QueryKey, APIs} from '~/types/http';
 import {IListResponse} from '~/types/interfaceCommon';
 
+interface IAutocompleteProps<TForm, TItem> {
+  form: UseFormReturnType<TForm>;
+  controlField: keyof TForm;
+  queryKey: QueryKey;
+  api: APIs;
+  itemProps: {value: keyof TItem; label: keyof TItem; keyData: keyof TItem};
+}
+
 /**
  * A single autocomplete select with data list from server.
  * ___
@@ -19,38 +27,37 @@ import {IListResponse} from '~/types/interfaceCommon';
  *
  *  `label` a string to display on autocomplete suggestion
  *
- *  `keyData` key mapping for items value. `itemData[keyData]` value will be set to form.
+ *  `keyData` key mapping for items value
+ * ___
+ * Additional Info: Value of `TItem[keyData]` will be used for set form field value which is stored at `itemdata` - a html attribute of each rendered item.
  *
  */
-const AutocompleteAsync = <T, TItem>({
+const AutocompleteAsync = <TForm, TItem>({
   form,
   controlField,
   queryKey,
   api,
   itemProps,
-}: {
-  form: UseFormReturnType<T>;
-  controlField: keyof T;
-  queryKey: QueryKey;
-  api: APIs;
-  itemProps: {value: keyof TItem; label: keyof TItem; keyData: keyof TItem};
-}) => {
+  ...props
+}: IAutocompleteProps<TForm, TItem> & Omit<AutocompleteProps, 'data' | 'form'>) => {
   const {t} = useTranslation();
   const [textSearch, setTextSearch] = useState('');
   const [textSearchDebounced] = useDebouncedValue(textSearch, DEBOUNCE_TIME);
 
   const fieldValue = form.values[controlField];
-  const filterAutocomplete = {
-    textSearchDebounced,
-    page: 0,
-    pageSize: 100,
-    sortOrder: 'ASC',
-    sortProperty: 'name',
-  };
 
   const {data: listDeviceProfiles, isFetching} = useQuery({
     queryKey: [queryKey, textSearchDebounced],
-    queryFn: () => http.get<IListResponse<TItem>>(api, {params: filterAutocomplete}),
+    queryFn: () =>
+      http.get<IListResponse<TItem>>(api, {
+        params: {
+          textSearchDebounced,
+          page: 0,
+          pageSize: 100,
+          sortOrder: 'ASC',
+          sortProperty: 'name',
+        },
+      }),
     keepPreviousData: true,
   });
 
@@ -72,26 +79,25 @@ const AutocompleteAsync = <T, TItem>({
   return (
     <Autocomplete
       value={textSearch}
-      label={t('device.deviceProfile')}
       data={
         listDeviceProfiles?.data?.map((item) => ({
           value: item[itemProps.value] as string,
           label: item[itemProps.label],
-          itemData: item[itemProps.keyData],
+          itemdata: item[itemProps.keyData],
         })) || []
       }
-      onItemSubmit={({itemData}) => itemData && form.setFieldValue(controlField, itemData)}
-      onChange={(e) => !fieldValue && setTextSearch(e)} // can't search if an item is selected. Need to de-select first.
-      onBlur={() => !fieldValue && setTextSearch('')} // remove textSearch when no item is selected and it be outfocused.
+      onItemSubmit={({itemdata}) => itemdata && form.setFieldValue(controlField, itemdata)}
+      onChange={(e) => !fieldValue && setTextSearch(e)} // if an item is selected, force de-select before search.
+      onBlur={() => !fieldValue && setTextSearch('')} // auto remove textSearch if this field was outfocused when no item is selected.
       rightSection={renderRightSection}
       nothingFound={t('common.no_data')}
-      withAsterisk
       error={form.errors[controlField]}
+      {...props}
     />
   );
 };
 
-// The Select component still can't fit with requirement and it has some UI bugs with below implementation.
+// Mantine v5.10: The Select component still can't fit with requirement and it has some UI bugs with below implementation.
 // <Select
 //   label={t('device.deviceProfile')}
 //   value={formDeviceValues.deviceProfileId?.id}

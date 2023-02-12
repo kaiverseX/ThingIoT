@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import {Button, Checkbox, Divider, Textarea, TextInput} from '@mantine/core';
+import {Button, Checkbox, Divider, Select, Textarea, TextInput} from '@mantine/core';
 import {useForm, zodResolver} from '@mantine/form';
 import {z} from 'zod';
 import {useTranslation} from 'react-i18next';
@@ -58,6 +58,7 @@ const DeviceCreate = () => {
         gateway: false,
         overwriteActivityTime: false,
       },
+      deviceProfileControl: 'existing',
     },
     validate: zodResolver(validationSchema),
     validateInputOnChange: true,
@@ -77,9 +78,8 @@ const DeviceCreate = () => {
       <Head title={t('device.add')} />
       <div>
         <CommonHeader title={t('device.add')} breadcrumbData={breadcrumbData} />
-        <form id="form-login" className="my-4" onSubmit={onSubmit(handleCreateDevice)}>
+        <form className="my-4" onSubmit={onSubmit(handleCreateDevice)}>
           <Divider my="sm" variant="dashed" label="Basic Info" />
-
           <div className="grid grid-cols-2 gap-4">
             <TextInput
               placeholder={t('device.name')}
@@ -89,7 +89,6 @@ const DeviceCreate = () => {
             />
             <TextInput label={t('common.label')} withAsterisk {...getInputProps('label')} />
           </div>
-
           <Textarea
             className="my-4"
             placeholder={t('common.description')}
@@ -99,14 +98,36 @@ const DeviceCreate = () => {
             minRows={2}
           />
 
-          <AutocompleteAsync<IDeviceMutateForm, IDeviceInfoList>
-            form={deviceCreateForm}
-            controlField="deviceProfileId"
-            queryKey={QueryKey.DEVICE_PROFILE}
-            api={APIs.DEVICE_PROFILES}
-            itemProps={{value: 'name', label: 'name', keyData: 'id'}}
-          />
-
+          {/* 
+            StoryTelling - a form component
+            story: {type: narration | plot | choices, }[]
+           */}
+          <div className="flex flex-wrap items-center gap-4">
+            <Select
+              className="flex items-center gap-4"
+              classNames={{wrapper: 'w-28'}}
+              label="Use"
+              data={[
+                {value: 'existing', label: 'existing'},
+                {value: 'new', label: 'new'},
+              ]}
+              {...getInputProps('deviceProfileControl')}
+            />
+            {formDeviceValues.deviceProfileControl === 'existing' ? (
+              <AutocompleteAsync<IDeviceMutateForm, IDeviceInfoList>
+                className="flex items-center gap-4"
+                form={deviceCreateForm}
+                label={t('device.deviceProfile').toLowerCase() + ': '}
+                controlField="deviceProfileId"
+                queryKey={QueryKey.DEVICE_PROFILE_LIST}
+                api={APIs.DEVICE_PROFILE_LIST}
+                itemProps={{value: 'name', label: 'name', keyData: 'id'}}
+                withAsterisk
+              />
+            ) : (
+              <div>New</div>
+            )}
+          </div>
           <div className="my-4 flex gap-4">
             <Checkbox
               label={t('device.isGateway')}
@@ -120,7 +141,6 @@ const DeviceCreate = () => {
               />
             )}
           </div>
-
           <Divider my="sm" variant="dashed" />
         </form>
         <StickyFooter>

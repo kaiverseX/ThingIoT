@@ -1,0 +1,14 @@
+{
+  "name": "Device T2401",
+  "label": "DT2401",
+  "deviceProfileId": {
+    "entityType": "DEVICE_PROFILE",
+    "id": "6f5fd650-9b89-11ed-a3a7-a370cc0b9cb6"
+  },
+  "additionalInfo": {
+    "gateway": false,
+    "overwriteActivityTime": false,
+    "description": ""
+  },
+  "customerId": null
+}

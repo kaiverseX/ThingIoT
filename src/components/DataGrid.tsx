@@ -57,6 +57,7 @@ const DataGrid = <T,>({columns, api, queryKey, ...props}: IDataGridProps & DataT
 
   return (
     <DataTable<T>
+      classNames={{pagination: 'p-0 pt-4'}}
       fetching={isFetching}
       columns={columns}
       records={listData?.data}

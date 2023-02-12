@@ -42,7 +42,7 @@ const Device = () => {
         <IconCircleCheck />
       </ThemeIcon>
     ) : (
-      <ThemeIcon className="h-full" radius="xl" variant="light" color="red" size="sm">
+      <ThemeIcon radius="xl" variant="light" color="red" size="sm">
         <IconCircleMinus />
       </ThemeIcon>
     );

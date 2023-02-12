@@ -1,0 +1,11 @@
+{
+  "id": {
+    "entityType": "DEVICE_PROFILE",
+    "id": "6f5fd650-9b89-11ed-a3a7-a370cc0b9cb6"
+  },
+  "name": "DP2401",
+  "image": null,
+  "defaultDashboardId": null,
+  "type": "DEFAULT",
+  "transportType": "DEFAULT"
+}

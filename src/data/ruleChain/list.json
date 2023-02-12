@@ -1,0 +1,22 @@
+{
+  "id": {
+    "entityType": "RULE_CHAIN",
+    "id": "230e6550-04f7-11e9-a1f6-a3a281c054e4"
+  },
+  "createdTime": 1545379510309,
+  "additionalInfo": null,
+  "tenantId": {
+    "entityType": "TENANT",
+    "id": "23098350-04f7-11e9-a1f6-a3a281c054e4"
+  },
+  "name": "Root Rule Chain",
+  "type": "CORE",
+  "firstRuleNodeId": {
+    "entityType": "RULE_NODE",
+    "id": "e166fa30-0d4c-11eb-ab90-09ceaa526dd8"
+  },
+  "root": true,
+  "debugMode": false,
+  "configuration": null,
+  "externalId": null
+}

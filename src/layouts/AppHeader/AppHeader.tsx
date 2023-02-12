@@ -52,7 +52,12 @@ const AppHeader = () => {
   }, []);
 
   return (
-    <Header height={60} className="flex-center-between px-4">
+    <Header
+      height={60}
+      className="flex-center-between px-4"
+      // className="supports-backdrop-blur:bg-white/60 flex-center-between bg-white/60 px-4 backdrop-blur
+      // dark:border-slate-50/[0.06] dark:bg-transparent"
+    >
       <Link className="cursor-pointer no-underline" to={Path.HOMEPAGE}>
         <span className="bg-gradient-to-r from-rose-500 to-violet-500 bg-clip-text text-3xl font-bold text-transparent">
           Deviceverse

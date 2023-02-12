@@ -1,18 +1,15 @@
+import {ICommonData, IRecordId} from '~/types/interfaceCommon';
+
 export interface IDeviceFilter {
   textSearch: string;
   deviceProfileId: string;
   type?: string;
 }
 
-export interface IDeviceList {
+export interface IDeviceList extends ICommonData {
   name: string;
   type: string;
   label?: string;
-
-  id: {
-    id: string;
-    entityType: string;
-  };
 
   deviceProfileId: {
     id: string;
@@ -28,13 +25,11 @@ export interface IDeviceList {
     overwriteActivityTime: boolean;
     description: string;
   };
-
-  createdTime: number;
 }
 
 export interface IDeviceDetail extends IDeviceList {
-  tenantId: {entityType: string; id: string};
-  customerId: {entityType: string; id: string};
+  tenantId: IRecordId;
+  customerId: IRecordId;
   deviceData: {
     configuration: {type: string};
     transportConfiguration: {type: string};
@@ -49,16 +44,17 @@ export interface IDeviceMutateForm {
   name: string;
   type: string;
   label: string;
-  deviceProfileId?: {id: string; entityType: string};
+  deviceProfileId?: IRecordId;
+  deviceProfileControl: 'new' | 'existing';
 
-  tenantId?: {entityType: string; id: string};
-  customerId?: {entityType: string; id: string};
+  tenantId?: IRecordId;
+  customerId?: IRecordId;
   deviceData?: {
     configuration?: {type: string};
     transportConfiguration?: {type: string};
   };
-  firmwareId?: {entityType: string; id: string};
-  softwareId?: {entityType: string; id: string};
+  firmwareId?: IRecordId;
+  softwareId?: IRecordId;
 
   additionalInfo: {
     gateway: boolean;
@@ -71,16 +67,16 @@ export interface IDeviceCreate {
   name: string;
   type: string;
   label: string;
-  deviceProfileId: {id: string; entityType: string};
+  deviceProfileId: IRecordId;
 
-  tenantId?: {entityType: string; id: string};
-  customerId?: {entityType: string; id: string};
+  tenantId?: IRecordId;
+  customerId?: IRecordId;
   deviceData?: {
     configuration?: {type: string};
     transportConfiguration?: {type: string};
   };
-  firmwareId?: {entityType: string; id: string};
-  softwareId?: {entityType: string; id: string};
+  firmwareId?: IRecordId;
+  softwareId?: IRecordId;
 
   additionalInfo?: {
     gateway: boolean;
@@ -90,8 +86,5 @@ export interface IDeviceCreate {
 }
 
 export interface IDeviceUpdate extends IDeviceCreate {
-  id: {
-    id: string;
-    entityType: string;
-  };
+  id: IRecordId;
 }

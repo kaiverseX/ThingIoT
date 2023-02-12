@@ -92,6 +92,7 @@
     "detail": "Device details",
     "name": "Device Name",
     "deviceProfile": "Device profile",
+    "deviceProfileName": "Device profile name",
     "customer": "Customer",
     "public": "Public",
     "isGateway": "Is gateway",

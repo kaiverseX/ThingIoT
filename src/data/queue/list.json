@@ -1,0 +1,89 @@
+[
+  {
+    "id": {
+      "entityType": "QUEUE",
+      "id": "1958daa0-e274-11ec-af68-f9de2e74cff0"
+    },
+    "createdTime": 1654174881098,
+    "additionalInfo": null,
+    "tenantId": {
+      "entityType": "TENANT",
+      "id": "13814000-1dd2-11b2-8080-808080808080"
+    },
+    "name": "HighPriority",
+    "topic": "tb_rule_engine.hp",
+    "pollInterval": 25,
+    "partitions": 24,
+    "consumerPerPartition": true,
+    "packProcessingTimeout": 2000,
+    "submitStrategy": {
+      "type": "BURST",
+      "batchSize": 100
+    },
+    "processingStrategy": {
+      "type": "RETRY_FAILED_AND_TIMED_OUT",
+      "retries": 0,
+      "failurePercentage": 0,
+      "pauseBetweenRetries": 5,
+      "maxPauseBetweenRetries": 5
+    }
+  },
+  {
+    "id": {
+      "entityType": "QUEUE",
+      "id": "192c9a80-e274-11ec-af68-f9de2e74cff0"
+    },
+    "createdTime": 1654174880808,
+    "additionalInfo": null,
+    "tenantId": {
+      "entityType": "TENANT",
+      "id": "13814000-1dd2-11b2-8080-808080808080"
+    },
+    "name": "Main",
+    "topic": "tb_rule_engine.main",
+    "pollInterval": 25,
+    "partitions": 24,
+    "consumerPerPartition": true,
+    "packProcessingTimeout": 2000,
+    "submitStrategy": {
+      "type": "BURST",
+      "batchSize": 1000
+    },
+    "processingStrategy": {
+      "type": "SKIP_ALL_FAILURES",
+      "retries": 1,
+      "failurePercentage": 0,
+      "pauseBetweenRetries": 0,
+      "maxPauseBetweenRetries": 3
+    }
+  },
+  {
+    "id": {
+      "entityType": "QUEUE",
+      "id": "195b2490-e274-11ec-af68-f9de2e74cff0"
+    },
+    "createdTime": 1654174881113,
+    "additionalInfo": null,
+    "tenantId": {
+      "entityType": "TENANT",
+      "id": "13814000-1dd2-11b2-8080-808080808080"
+    },
+    "name": "SequentialByOriginator",
+    "topic": "tb_rule_engine.sq",
+    "pollInterval": 25,
+    "partitions": 24,
+    "consumerPerPartition": true,
+    "packProcessingTimeout": 2000,
+    "submitStrategy": {
+      "type": "SEQUENTIAL_BY_ORIGINATOR",
+      "batchSize": 100
+    },
+    "processingStrategy": {
+      "type": "RETRY_FAILED_AND_TIMED_OUT",
+      "retries": 3,
+      "failurePercentage": 0,
+      "pauseBetweenRetries": 5,
+      "maxPauseBetweenRetries": 5
+    }
+  }
+]

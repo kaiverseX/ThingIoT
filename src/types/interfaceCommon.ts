@@ -41,25 +41,56 @@ export interface INavLink extends INavLinkChild {
   icon: TablerIcon;
 }
 
-export interface IUserData {
-  id?: {
-    id: string;
-    entityType: string;
-  };
-  tenantId?: {
-    id: string;
-    entityType: string;
-  };
-  customerId?: {
-    id: string;
-    entityType: string;
-  };
+export interface IRecordId {
+  id: string;
+  entityType: string;
+}
+
+export interface ICommonData {
+  id?: IRecordId;
+  additionalInfo?: unknown;
+  createdTime?: number;
+}
+
+export interface IUserData extends ICommonData {
+  tenantId?: IRecordId;
+  customerId?: IRecordId;
   email: string;
   name?: string;
   authority: string;
   firstName: string;
   lastName: string;
-  additionalInfo?: JSON;
+}
 
-  createdTime?: number;
+// Break below interfaces if its has its own component.
+export interface IRuleChains extends ICommonData {
+  tenantId?: IRecordId;
+  name: string;
+  type: string;
+  firstRuleNodeId?: IRecordId;
+  root: boolean;
+  debugMode: boolean;
+  configuration: JSON;
+  externalId?: IRecordId;
+}
+
+export interface IQueues extends ICommonData {
+  tenantId?: IRecordId;
+  name: string;
+  topic: string;
+  pollInterval: number;
+  partitions: number;
+  consumerPerPartition: boolean;
+  packProcessingTimeout: number;
+  submitStrategy: {
+    type: string;
+    batchSize: number;
+  };
+  processingStrategy: {
+    type: string;
+    retries: number;
+    failurePercentage: number;
+    pauseBetweenRetries: number;
+    maxPauseBetweenRetries: number;
+  };
 }

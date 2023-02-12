@@ -1,0 +1,23 @@
+{
+  "name": "DP2401",
+  "type": "DEFAULT",
+  "defaultQueueName": "HighPriority",
+  "transportType": "DEFAULT",
+  "provisionType": "DISABLED",
+  "profileData": {
+    "configuration": {
+      "type": "DEFAULT"
+    },
+    "transportConfiguration": {
+      "type": "DEFAULT"
+    },
+    "alarms": null,
+    "provisionConfiguration": {
+      "type": "DISABLED"
+    }
+  },
+  "defaultRuleChainId": {
+    "entityType": "RULE_CHAIN",
+    "id": "230e6550-04f7-11e9-a1f6-a3a281c054e4"
+  }
+}
